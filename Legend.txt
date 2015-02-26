@@ -1,0 +1,10 @@
+C,Cat Room
+R,Room
+L,Loomery
+S,Sauna
+H,Halfway House
+O,Bob
+D,Dog Room
+B,Ballad Room
+K,Kaligraphy Room
+W,Walkway
