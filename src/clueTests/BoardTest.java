@@ -35,16 +35,16 @@ public class BoardTest {
 	@Test
 	public void roomLegend(){
 		Map<Character, String> rooms = testBoard.getRooms();
-		Assert.assertEquals(rooms.get('C') , "Cat Room");
-		Assert.assertEquals(rooms.get('R') , "Room");
-		Assert.assertEquals(rooms.get('L'), "Loomery");
-		Assert.assertEquals(rooms.get('S'), "Sauna");
-		Assert.assertEquals(rooms.get('H'), "Halfway House");
-		Assert.assertEquals(rooms.get('O') , "Bob");
-		Assert.assertEquals(rooms.get('D'), "Dog Room");
-		Assert.assertEquals(rooms.get('B'), "Ballad Room");
-		Assert.assertEquals(rooms.get('K') , "Kaligraphy Room");
-		Assert.assertEquals(rooms.get('W') , "Walkway");
+		Assert.assertEquals(rooms.get('M'), "MacLaren's Pub");
+		Assert.assertEquals(rooms.get('B'), "Barney's Bachelor Pad");
+		Assert.assertEquals(rooms.get('T'), "Ted's Apartment");
+		Assert.assertEquals(rooms.get('L'), "Laser Tag Arena");
+		Assert.assertEquals(rooms.get('C'), "The Captain's Boat");
+		Assert.assertEquals(rooms.get('R'), "Lily's Classroom");
+		Assert.assertEquals(rooms.get('N'), "Metro News 1");
+		Assert.assertEquals(rooms.get('A'), "Cafe L'amour");
+		Assert.assertEquals(rooms.get('F'), "Farhampton Inn");
+		Assert.assertEquals(rooms.get('W'), "Walkway");
 		
 	}
 	
@@ -61,10 +61,10 @@ public class BoardTest {
 	@Test 
 	public void roomInitials(){
 		
-		Assert.assertEquals('D', testBoard.getRoomCellAt(3,3).getInitial());
-		Assert.assertEquals('O', testBoard.getRoomCellAt(24,12).getInitial());
-		Assert.assertEquals('B', testBoard.getRoomCellAt(15,1).getInitial());
-		Assert.assertEquals('R', testBoard.getRoomCellAt(0,8).getInitial());
+		Assert.assertEquals('N', testBoard.getRoomCellAt(3,3).getInitial());
+		Assert.assertEquals('M', testBoard.getRoomCellAt(24,12).getInitial());
+		Assert.assertEquals('L', testBoard.getRoomCellAt(15,1).getInitial());
+		Assert.assertEquals('T', testBoard.getRoomCellAt(0,8).getInitial());
 
 	}
 	

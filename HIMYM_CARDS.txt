@@ -1,0 +1,22 @@
+W,Pineapple
+W,Ducky Tie
+W,A Slap
+W,Yellow Umbrella 
+W,Red Cowboy Boots
+W,Cockamouse 
+P,Barney Stinson
+P,Marshall Eriksen
+P,Lily Aldrin
+P,Ted Mosby 
+P,Robin Scherbatsky
+P,Tracy McDonald
+R,MacLaren's Pub
+R,Barney's Bachelor Pad
+R,Ted's Apartment
+R,Laser Tag Arena
+R,The Captain's Boat
+R,Lily's Classroom
+R,Metro News 1
+R,Cafe L'amour
+R,Farhampton Inn 
+  

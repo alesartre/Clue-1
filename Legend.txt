@@ -1,10 +1,10 @@
-C,Cat Room
-R,Room
-L,Loomery
-S,Sauna
-H,Halfway House
-O,Bob
-D,Dog Room
-B,Ballad Room
-K,Kaligraphy Room
+M,MacLaren's Pub
+B,Barney's Bachelor Pad
+T,Ted's Apartment
+L,Laser Tag Arena
+C,The Captain's Boat
+R,Lily's Classroom
+N,Metro News 1
+A,Cafe L'amour
+F,Farhampton Inn
 W,Walkway

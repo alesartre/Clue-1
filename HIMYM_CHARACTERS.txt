@@ -1,0 +1,6 @@
+Barney Stinson,RED,0,5
+Marshall Eriksen,GREEN,0,19
+Lily Aldrin,YELLOW,10,21 
+Ted Mosby,PURPLE,21,21 
+Robin Scherbatsky,BLUE,27,10 
+Tracy McDonald,ORANGE,11,0 
