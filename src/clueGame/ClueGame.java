@@ -25,12 +25,16 @@ public class ClueGame {
 	private String layoutFileName;
 	private String legendFileName;
 	private Board board;
+	private ArrayList<Card> deck;
+	private ArrayList<Player> people;
+	private ArrayList<Card> dealt;
 	
 	public void loadConfigFiles(){
 		try {
 			loadRoomConfig();
 			board = new Board(rooms, layoutFileName);
 			board.loadBoardConfig();
+			loadCardConfig();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -63,8 +67,25 @@ public class ClueGame {
 		}
 	}
 	
+	public void loadCardConfig() {
+		
+		
+	}
+	
+	public void deal(){
+		
+		
+	}
+	
 	public Board getBoard(){
 		return board;
 	}
 	
+	public Player getPerson(int x){
+		return people.get(x);
+	}
+	
+	public ArrayList<Card> getDeck(){
+		return deck;
+	}
 }

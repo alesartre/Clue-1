@@ -5,6 +5,19 @@ public class Card {
 	public enum CardType {PERSON, WEAPON, ROOM};
 	private CardType cardType;
 	
+	public Card(char type, String name){
+		this.name = name;
+		switch (type){
+		case 'W':	cardType = CardType.WEAPON;
+					break;
+		case 'P': 	cardType = CardType.PERSON;
+					break;
+		case 'R': 	cardType = CardType.ROOM;
+					break;
+		}
+		
+	}
+	
 	public String getName() {
 		return name;
 	}
