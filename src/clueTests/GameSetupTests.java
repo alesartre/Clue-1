@@ -36,6 +36,42 @@ public class GameSetupTests {
 	}
 	
 	
-	
+	@Test
+	public void loadCards(){
+		ArrayList<Card> deck = game.getDeck();
+		Assert.assertEquals(deck.size(), 21);
+		int p = 0;
+		int w = 0;
+		int r = 0;
+		boolean bs = false;
+		boolean dt = false;
+		boolean mn1 = false;
+		for( Card c: deck){
+			if (c.getCardType() == Card.CardType.PERSON){
+				p++;
+				if(c.getName() == "Barney Stinson"){
+					bs = true;
+				}
+			}
+			else if(c.getCardType() == Card.CardType.WEAPON){
+				w++;
+				if(c.getName() == "Ducky Tie"){
+					dt = true;
+				}
+			}
+			else if(c.getCardType() == Card.CardType.ROOM){
+				r++;
+				if(c.getName() == "Metro News 1"){
+					mn1 = true;
+				}
+			}
+		}
+		Assert.assertEquals(p, 6);
+		Assert.assertEquals(w, 6);
+		Assert.assertEquals(r, 9);
+		Assert.assertEquals(bs, true);
+		Assert.assertEquals(dt, true);
+		Assert.assertEquals(mn1, true);
+	}
 	
 }
