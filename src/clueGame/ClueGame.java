@@ -5,6 +5,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
+import clueGame.Card.CardType;
+
 public class ClueGame {
 	
 	public ClueGame(String layoutFileName, String legendFileName){
@@ -36,6 +38,7 @@ public class ClueGame {
 			board.loadBoardConfig();
 			loadPeople("HIMYM_CHARACTERS.txt");
 			loadCardConfig("HIMYM_CARDS.txt");
+			deal();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -97,6 +100,71 @@ public class ClueGame {
 	}
 	
 	public void deal(){
+		System.out.println("here");
+		Set<Card> weapons = new HashSet<Card>();
+		Set<Card> peoples = new HashSet<Card>();
+		Set<Card> rooms = new HashSet<Card>();
+		for(Card c : deck){
+			if(c.getCardType()== CardType.WEAPON){
+				weapons.add(c);
+			}
+			else if(c.getCardType()==CardType.PERSON){
+				peoples.add(c);
+			}
+			else if(c.getCardType()==CardType.ROOM){
+				rooms.add(c);
+			}
+		}
+		
+		int W = new Random().nextInt(weapons.size());//get weapon
+		int P = new Random().nextInt(peoples.size());
+		int R = new Random().nextInt(rooms.size());
+		
+		Card temp = null;
+		Card temp2 = null;
+		Card temp3 = null;
+		int i = 0;
+		for(Card c : weapons){
+			if(i==W){
+				temp = c;
+			}
+			i=i+1;
+		}
+		i=0;
+		for(Card c : peoples){
+			if(i==P){
+				temp2 = c;
+			}
+			i = i+1;
+		}
+		i = 0;
+		for(Card c: rooms){
+			if(i==R){
+				temp3 = c;
+			}
+			i = i+1;
+		}
+		
+		Solution solved = new Solution(temp, temp2, temp3);
+		
+		dealt = new ArrayList<Card>();
+		dealt.add(temp);
+		dealt.add(temp2);
+		dealt.add(temp3);
+		
+		for(Player p : people){
+			i = 0;
+			System.out.println("here");
+			while (i!=3){
+				int index = new Random().nextInt(deck.size());
+				if(!dealt.contains(deck.get(index))){
+					System.out.println(deck.get(index));
+					p.getCardList().add(deck.get(index));
+					dealt.add(deck.get(index));
+					i++;
+				}
+			}
+		}
 		
 		
 	}

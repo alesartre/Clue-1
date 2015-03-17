@@ -55,6 +55,7 @@ public class GameSetupTests {
 		ArrayList<Card> deckTest = new ArrayList<Card>();
 		for( Player p: peeps){
 			if(p.getCardList().size()!=3){ //makes sure every player has 3 cards
+				System.out.println(p.getCardList().size());
 				fail();
 			}
 			for( Card c: p.getCardList()){
@@ -66,7 +67,11 @@ public class GameSetupTests {
 				}
 			}
 		}
-		Assert.assertEquals(deckTest, deck);//this confirms that all cards were dealt
+		for(Card c: deckTest){//makes sure all cards were dealt
+			if(!deck.contains(c)){
+				fail();
+			}
+		}
 		
 		
 	}

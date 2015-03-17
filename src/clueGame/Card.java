@@ -5,6 +5,10 @@ public class Card {
 	public enum CardType {PERSON, WEAPON, ROOM};
 	private CardType cardType;
 	
+	public Card(){
+		super();
+	}
+	
 	public Card(char type, String name){
 		this.name = name;
 		switch (type){
@@ -32,6 +36,13 @@ public class Card {
 
 	public void setCardType(CardType cardType) {
 		this.cardType = cardType;
+	}
+
+	
+	
+	@Override
+	public String toString() {
+		return "Card [name=" + name + ", cardType=" + cardType + "]";
 	}
 
 	@Override

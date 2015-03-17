@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public abstract class Player {
 	private String name;
-	private ArrayList<Card> cardList;
+	private ArrayList<Card> cardList = new ArrayList<Card>();
 	private int startR;
 	private int startC;
 	private Color color;
