@@ -164,16 +164,16 @@ public class GameSetupTests {
 		queryTestGame.loadConfigFiles();
 		queryTestGame.setPeople(players);
 		//Test that null is returned when no players can disprove
-		Assert.assertEquals(queryTestGame.handleSuggestion("Marshall Eriksen", "Cafe L'amour", "Red Cowboy Boots", queryTestGame.getPerson(0)), null);
+		Assert.assertEquals(queryTestGame.handleSuggestion("Marshall Eriksen", "Cafe L'amour", "Red Cowboy Boots", queryTestGame.getPeople(), 0), null);
 		//Test that the correct card is returned when only one player can disprove
-		Assert.assertEquals(queryTestGame.handleSuggestion("Ted Mosby", "Cafe L'amour", "Red Cowboy Boots", queryTestGame.getPerson(1)), new Card('P', "Ted Mosby"));
+		Assert.assertEquals(queryTestGame.handleSuggestion("Ted Mosby", "Cafe L'amour", "Red Cowboy Boots", queryTestGame.getPeople(), 1), new Card('P', "Ted Mosby"));
 		//Test that null is returned when only the active player can disprove, for both human and computer players
-		Assert.assertEquals(queryTestGame.handleSuggestion("Ted Mosby", "Cafe L'amour", "Red Cowboy Boots", queryTestGame.getPerson(0)), null);
-		Assert.assertEquals(queryTestGame.handleSuggestion("Lily Aldrin", "Cafe L'amour", "Red Cowboy Boots", queryTestGame.getPerson(2)), null);
+		Assert.assertEquals(queryTestGame.handleSuggestion("Ted Mosby", "Cafe L'amour", "Red Cowboy Boots", queryTestGame.getPeople(), 0), null);
+		Assert.assertEquals(queryTestGame.handleSuggestion("Lily Aldrin", "Cafe L'amour", "Red Cowboy Boots", queryTestGame.getPeople(), 2), null);
 		//Test that the first player in line disproves a suggestion that multiple players can disprove
-		Assert.assertEquals(queryTestGame.handleSuggestion("Tracy McDonald", "MacLaren's Pub", "Red Cowboy Boots", queryTestGame.getPerson(0)), new Card('P', "Tracy McDonald"));
+		Assert.assertEquals(queryTestGame.handleSuggestion("Tracy McDonald", "MacLaren's Pub", "Red Cowboy Boots", queryTestGame.getPeople(), 0), new Card('P', "Tracy McDonald"));
 		//Test that all players are queried
-		Assert.assertEquals(queryTestGame.handleSuggestion("Marshall Eriksen", "MacLaren's Pub", "Red Cowboy Boots", queryTestGame.getPerson(0)), new Card('P', "Tracy McDonald"));
+		Assert.assertEquals(queryTestGame.handleSuggestion("Marshall Eriksen", "MacLaren's Pub", "Red Cowboy Boots", queryTestGame.getPeople(), 0), new Card('R', "MacLaren's Pub"));
 		
 	}
 }

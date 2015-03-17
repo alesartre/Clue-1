@@ -182,7 +182,15 @@ public class ClueGame {
 		return deck;
 	}
 	
-	public Card handleSuggestion(String person, String room, String weapon, Player current){
+	public Card handleSuggestion(String person, String room, String weapon, ArrayList<Player> players, int currentPlayer){
+		int player = currentPlayer + 1;
+		while(player%players.size() != currentPlayer){
+			Card result = players.get(player%players.size()).disproveSuggestion(person, room, weapon);
+			if (result != null){
+				return result;
+			}
+			player++;
+		}
 		return null;
 	}
 
