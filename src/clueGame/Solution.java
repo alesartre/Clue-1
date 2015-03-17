@@ -18,6 +18,10 @@ public class Solution {
 		solution.add(r);
 		
 	}
+	
+	public boolean suggest(Card w, Card p, Card r){
+		return false;
+	}
 
 
 	public ArrayList<Card> getSolution(){
