@@ -80,11 +80,31 @@ public class GameSetupTests {
 	@Test
 	public void accusations(){
 		Solution testSol = new Solution(testdeck.get(1),testdeck.get(0),testdeck.get(2));
-		Assert.assertTrue(testSol.suggest(new Card('W',"Ducky Tie"), new Card ('P',"Barney Stinson"), new Card('R',"Metro News 1")));
-		Assert.assertFalse(testSol.suggest(new Card('W',"Ducky Tie"),new Card('P',"Ted Mosby"), new Card('R',"Metro News 1")));
-		Assert.assertFalse(testSol.suggest(new Card('W',"Yellow Umbrella"),new Card('P',"Barney Stinson"), new Card('R',"Metro News 1")));
-		Assert.assertFalse(testSol.suggest(new Card('W',"Ducky Tie"),new Card('P',"Barney Stinson"), new Card('R',"Lily's Classroom")));
-		Assert.assertFalse(testSol.suggest(new Card('W',"Yellow Umbrella") ,new Card('P',"Ted Mosby"), new Card('R',"Lily's Classroom")));
+		Assert.assertTrue(testSol.accuse(new Card('W',"Ducky Tie"), new Card ('P',"Barney Stinson"), new Card('R',"Metro News 1")));
+		Assert.assertFalse(testSol.accuse(new Card('W',"Ducky Tie"),new Card('P',"Ted Mosby"), new Card('R',"Metro News 1")));
+		Assert.assertFalse(testSol.accuse(new Card('W',"Yellow Umbrella"),new Card('P',"Barney Stinson"), new Card('R',"Metro News 1")));
+		Assert.assertFalse(testSol.accuse(new Card('W',"Ducky Tie"),new Card('P',"Barney Stinson"), new Card('R',"Lily's Classroom")));
+		Assert.assertFalse(testSol.accuse(new Card('W',"Yellow Umbrella") ,new Card('P',"Ted Mosby"), new Card('R',"Lily's Classroom")));
 	}
 	
+	@Test
+	public void oneplayeronematch(){
+		Card tedcard  = new Card('P', "Ted Mosby");
+		Card barneycard = new Card('P', "Barney Stinson");
+		Card slapcard = new Card('W', "A Slap");
+		Card tiecard = new Card('W', "Ducky Tie");
+		Card pubcard = new Card('R', "MacLaren's Pub");
+		Card newscard = new Card('R', "Metro News 1");
+		Player testplayer = game.getPerson(0);
+		testplayer.getCardList().add(tedcard);
+		testplayer.getCardList().add(barneycard);
+		testplayer.getCardList().add(slapcard);
+		testplayer.getCardList().add(tiecard);
+		testplayer.getCardList().add(pubcard);
+		testplayer.getCardList().add(newscard);
+		Assert.assertEquals(testplayer.disproveSuggestion("Ted Mosby", "Farhampton Inn", "Yellow Umbrella"), new Card('P', "Ted Mosby"));
+		Assert.assertEquals(testplayer.disproveSuggestion("Marshall Eriksen", "Metro News 1", "Yellow Umbrella"), new Card('R', "Metro News 1"));
+		Assert.assertEquals(testplayer.disproveSuggestion("Marshall Eriksen", "Farhampton Inn", "A Slap"), new Card('W', "A Slap"));
+		Assert.assertEquals(testplayer.disproveSuggestion("Marshall Eriksen", "Farhampton Inn", "Yellow Umbrella"), null);
+	}
 }

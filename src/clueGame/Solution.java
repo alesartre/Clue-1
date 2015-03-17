@@ -19,7 +19,7 @@ public class Solution {
 		
 	}
 	
-	public boolean suggest(Card w, Card p, Card r){
+	public boolean accuse(Card w, Card p, Card r){
 		if(!w.getName().equals(weapon)){
 			return false;
 		
