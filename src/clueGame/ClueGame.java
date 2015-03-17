@@ -35,7 +35,7 @@ public class ClueGame {
 			board = new Board(rooms, layoutFileName);
 			board.loadBoardConfig();
 			loadPeople("HIMYM_CHARACTERS.txt");
-			loadCardConfig();
+			loadCardConfig("HIMYM_CARDS.txt");
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -75,10 +75,8 @@ public class ClueGame {
 		while(scan.hasNextLine()){
 			String temp = scan.nextLine();
 			String[] temp1 = temp.split(",");
-			System.out.println(temp1[0]);
 			if(people.size()==0){
 				people.add(new HumanPlayer(temp1[0], temp1[1], Integer.parseInt(temp1[2]), Integer.parseInt(temp1[3].trim())));
-				System.out.println(people.get(0));
 			}
 			else
 				people.add(new ComputerPlayer(temp1[0], temp1[1], Integer.parseInt(temp1[2]), Integer.parseInt(temp1[3].trim())));
@@ -86,8 +84,15 @@ public class ClueGame {
 		
 	}
 	
-	public void loadCardConfig() {
-		
+	public void loadCardConfig(String textfile) throws FileNotFoundException {
+		FileReader cardFile = new FileReader(textfile);
+		Scanner scan = new Scanner(cardFile);
+		deck = new ArrayList<Card>();
+		while(scan.hasNextLine()){
+			String temp = scan.nextLine();
+			String[] temp1 = temp.split(",");
+			deck.add(new Card(temp1[0].charAt(0),temp1[1].trim()));
+		}
 		
 	}
 	

@@ -49,19 +49,20 @@ public class GameSetupTests {
 		for( Card c: deck){
 			if (c.getCardType() == Card.CardType.PERSON){
 				p++;
-				if(c.getName() == "Barney Stinson"){
+				System.out.println(c.getName());
+				if(c.getName().equals("Barney Stinson")){
 					bs = true;
 				}
 			}
 			else if(c.getCardType() == Card.CardType.WEAPON){
 				w++;
-				if(c.getName() == "Ducky Tie"){
+				if(c.getName().equals("Ducky Tie")){
 					dt = true;
 				}
 			}
 			else if(c.getCardType() == Card.CardType.ROOM){
 				r++;
-				if(c.getName() == "Metro News 1"){
+				if(c.getName().equals("Metro News 1")){
 					mn1 = true;
 				}
 			}
