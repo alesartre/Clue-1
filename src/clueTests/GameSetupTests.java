@@ -95,7 +95,7 @@ public class GameSetupTests {
 		Card tiecard = new Card('W', "Ducky Tie");
 		Card pubcard = new Card('R', "MacLaren's Pub");
 		Card newscard = new Card('R', "Metro News 1");
-		Player testplayer = game.getPerson(0);
+		Player testplayer = new ComputerPlayer("Ted Mosby", "MAGENTA", 0, 0);
 		testplayer.getCardList().add(tedcard);
 		testplayer.getCardList().add(barneycard);
 		testplayer.getCardList().add(slapcard);

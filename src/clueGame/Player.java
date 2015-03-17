@@ -26,6 +26,18 @@ public abstract class Player {
 	}
 	
 	public Card disproveSuggestion(String person, String room, String weapon) {
+		for(Card c: cardList){
+			if(c.getName().equals(person)){
+				return c;
+			}
+			else if(c.getName().equals(room)){
+				return c;
+			}
+			else if(c.getName().equals(weapon)){
+				return c;
+			}
+		}
+		
 		return null;
 	}
 	
