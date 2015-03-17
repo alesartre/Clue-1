@@ -48,4 +48,27 @@ public class GameSetupTests {
 		Assert.assertTrue(deck.contains(testdeck.get(2)));
 	}
 	
+	@Test
+	public void dealCardsTest(){
+		ArrayList<Player> peeps = game.getPeople();
+		ArrayList<Card> deck = game.getDeck();
+		ArrayList<Card> deckTest = new ArrayList<Card>();
+		for( Player p: peeps){
+			if(p.getCardList().size()!=3){ //makes sure every player has 3 cards
+				fail();
+			}
+			for( Card c: p.getCardList()){
+				if(deckTest.contains(c)){//makes sure no two players have the same card
+					fail();
+				}
+				else{
+					deckTest.add(c);
+				}
+			}
+		}
+		Assert.assertEquals(deckTest, deck);//this confirms that all cards were dealt
+		
+		
+	}
+	
 }

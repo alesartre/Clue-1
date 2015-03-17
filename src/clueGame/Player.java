@@ -85,6 +85,10 @@ public abstract class Player {
 	}
 	
 	
+	//For Testing
+	public ArrayList<Card> getCardList(){
+		return cardList;
+	}
 
 
 }

@@ -14,4 +14,8 @@ public class Solution {
 	}
 	
 	
+	public ArrayList<Card> getSolution(){
+	}
+	
+	
 }

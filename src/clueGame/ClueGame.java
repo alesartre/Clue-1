@@ -105,6 +105,10 @@ public class ClueGame {
 		return board;
 	}
 	
+	public ArrayList<Player> getPeople(){
+		return people;
+	}
+	
 	public Player getPerson(int x){
 		return people.get(x);
 	}
