@@ -107,4 +107,36 @@ public class GameSetupTests {
 		Assert.assertEquals(testplayer.disproveSuggestion("Marshall Eriksen", "Farhampton Inn", "A Slap"), new Card('W', "A Slap"));
 		Assert.assertEquals(testplayer.disproveSuggestion("Marshall Eriksen", "Farhampton Inn", "Yellow Umbrella"), null);
 	}
+	
+	@Test
+	public void oneplayerMultiplematches(){
+		Card barneycard = new Card('P', "Barney Stinson");
+		Card tiecard = new Card('W', "Ducky Tie");
+		Card newscard = new Card('R', "Metro News 1");
+		Player testplayer = new ComputerPlayer("Ted Mosby", "MAGENTA", 0, 0);
+		testplayer.getCardList().add(barneycard);
+		testplayer.getCardList().add(tiecard);
+		testplayer.getCardList().add(newscard);
+		int p = 0;
+		int r = 0;
+		int w = 0;
+		int i = 0;
+		while(i < 100){
+			Card testCard = testplayer.disproveSuggestion("Barney Stinson", "Ducky Tie", "Metro News 1");
+			if(testCard.getName().equals("Barney Stinson")){
+				p++;
+			}
+			if(testCard.getName().equals("Ducky Tie")){
+				w++;
+			}
+			if(testCard.getName().equals("Metro News 1")){
+				r++;
+			}
+			i++;
+		}
+		Assert.assertTrue(p>1);
+		Assert.assertTrue(r>1);
+		Assert.assertTrue(w>1);
+		
+	}
 }
