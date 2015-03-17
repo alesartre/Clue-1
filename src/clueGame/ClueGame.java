@@ -100,7 +100,6 @@ public class ClueGame {
 	}
 	
 	public void deal(){
-		System.out.println("here");
 		Set<Card> weapons = new HashSet<Card>();
 		Set<Card> peoples = new HashSet<Card>();
 		Set<Card> rooms = new HashSet<Card>();
@@ -154,11 +153,9 @@ public class ClueGame {
 		
 		for(Player p : people){
 			i = 0;
-			System.out.println("here");
 			while (i!=3){
 				int index = new Random().nextInt(deck.size());
 				if(!dealt.contains(deck.get(index))){
-					System.out.println(deck.get(index));
 					p.getCardList().add(deck.get(index));
 					dealt.add(deck.get(index));
 					i++;

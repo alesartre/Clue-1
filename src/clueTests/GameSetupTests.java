@@ -80,11 +80,11 @@ public class GameSetupTests {
 	@Test
 	public void accusations(){
 		Solution testSol = new Solution(testdeck.get(1),testdeck.get(0),testdeck.get(2));
-		Assert.assertTrue(testSol.suggest(new Card('P',"Barney Stinson"),new Card('W',"Ducky Tie"), new Card('R',"Metro News 1")));
-		Assert.assertFalse(testSol.suggest(new Card('P',"Ted Mosby"),new Card('W',"Ducky Tie"), new Card('R',"Metro News 1")));
-		Assert.assertTrue(testSol.suggest(new Card('P',"Barney Stinson"),new Card('W',"Yellow Umbrella"), new Card('R',"Metro News 1")));
-		Assert.assertTrue(testSol.suggest(new Card('P',"Barney Stinson"),new Card('W',"Ducky Tie"), new Card('R',"Lily's Classroom")));
-		Assert.assertTrue(testSol.suggest(new Card('P',"Ted Mosby"),new Card('W',"Yellow Umbrella"), new Card('R',"Lily's Classroom")));
+		Assert.assertTrue(testSol.suggest(new Card('W',"Ducky Tie"), new Card ('P',"Barney Stinson"), new Card('R',"Metro News 1")));
+		Assert.assertFalse(testSol.suggest(new Card('W',"Ducky Tie"),new Card('P',"Ted Mosby"), new Card('R',"Metro News 1")));
+		Assert.assertFalse(testSol.suggest(new Card('W',"Yellow Umbrella"),new Card('P',"Barney Stinson"), new Card('R',"Metro News 1")));
+		Assert.assertFalse(testSol.suggest(new Card('W',"Ducky Tie"),new Card('P',"Barney Stinson"), new Card('R',"Lily's Classroom")));
+		Assert.assertFalse(testSol.suggest(new Card('W',"Yellow Umbrella") ,new Card('P',"Ted Mosby"), new Card('R',"Lily's Classroom")));
 	}
 	
 }

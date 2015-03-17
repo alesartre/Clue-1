@@ -20,7 +20,19 @@ public class Solution {
 	}
 	
 	public boolean suggest(Card w, Card p, Card r){
-		return false;
+		if(!w.getName().equals(weapon)){
+			return false;
+		
+		}
+		else if(!p.getName().equals(person)){
+			return false;
+		}
+		else if(!r.getName().equals(room)){
+			return false;
+		}
+		else{
+			return true;
+		}
 	}
 
 
