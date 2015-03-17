@@ -1,4 +1,4 @@
-Ted Mosby,PURPLE,21,21 
+Ted Mosby,MAGENTA,21,21 
 Barney Stinson,RED,0,5
 Marshall Eriksen,GREEN,0,19
 Lily Aldrin,YELLOW,10,21 
