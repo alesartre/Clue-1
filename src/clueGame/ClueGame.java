@@ -181,4 +181,14 @@ public class ClueGame {
 	public ArrayList<Card> getDeck(){
 		return deck;
 	}
+	
+	public Card handleSuggestion(String person, String room, String weapon, Player current){
+		return null;
+	}
+
+	//Testing only
+	public void setPeople(ArrayList<Player> people) {
+		this.people = people;
+	}
+
 }

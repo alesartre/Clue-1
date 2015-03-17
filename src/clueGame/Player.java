@@ -110,5 +110,9 @@ public abstract class Player {
 		return cardList;
 	}
 
+	public void setCardList(ArrayList<Card> cardList) {
+		this.cardList = cardList;
+	}
+
 
 }

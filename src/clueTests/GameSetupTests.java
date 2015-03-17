@@ -139,4 +139,41 @@ public class GameSetupTests {
 		Assert.assertTrue(w>1);
 		
 	}
+	
+	@Test
+	public void playerQueryTest(){
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(new HumanPlayer("Ted Mosby", "MAGENTA", 0,0));
+		players.add(new ComputerPlayer("Barney Stinson", "RED", 0, 0));
+		players.add(new ComputerPlayer("Marshall Eriksen", "GREEN", 0, 0));
+		players.add(new ComputerPlayer("Lily Aldrin", "YELLOW", 0, 0));
+		players.get(0).getCardList().add(new Card('P', "Ted Mosby"));
+		players.get(0).getCardList().add(new Card('W', "A Slap"));
+		players.get(0).getCardList().add(new Card('R', "Metro News 1"));
+		players.get(1).getCardList().add(new Card('P', "Tracy McDonald"));
+		players.get(1).getCardList().add(new Card('W', "Yellow Umbrella"));
+		players.get(1).getCardList().add(new Card('R', "Farhampton Inn"));
+		players.get(2).getCardList().add(new Card('P', "Lily Aldrin"));
+		players.get(2).getCardList().add(new Card('W', "Pineapple"));
+		players.get(2).getCardList().add(new Card('R', "Laser Tag Arena"));
+		players.get(3).getCardList().add(new Card('P', "Barney Stinson"));
+		players.get(3).getCardList().add(new Card('W', "Cockamouse"));
+		players.get(3).getCardList().add(new Card('R', "MacLaren's Pub"));
+		//New ClueGame for this test so all other tests remain unchanged
+		ClueGame queryTestGame = new ClueGame("ClueLayout.csv", "ClueLegend.txt");
+		queryTestGame.loadConfigFiles();
+		queryTestGame.setPeople(players);
+		//Test that null is returned when no players can disprove
+		Assert.assertEquals(queryTestGame.handleSuggestion("Marshall Eriksen", "Cafe L'amour", "Red Cowboy Boots", queryTestGame.getPerson(0)), null);
+		//Test that the correct card is returned when only one player can disprove
+		Assert.assertEquals(queryTestGame.handleSuggestion("Ted Mosby", "Cafe L'amour", "Red Cowboy Boots", queryTestGame.getPerson(1)), new Card('P', "Ted Mosby"));
+		//Test that null is returned when only the active player can disprove, for both human and computer players
+		Assert.assertEquals(queryTestGame.handleSuggestion("Ted Mosby", "Cafe L'amour", "Red Cowboy Boots", queryTestGame.getPerson(0)), null);
+		Assert.assertEquals(queryTestGame.handleSuggestion("Lily Aldrin", "Cafe L'amour", "Red Cowboy Boots", queryTestGame.getPerson(2)), null);
+		//Test that the first player in line disproves a suggestion that multiple players can disprove
+		Assert.assertEquals(queryTestGame.handleSuggestion("Tracy McDonald", "MacLaren's Pub", "Red Cowboy Boots", queryTestGame.getPerson(0)), new Card('P', "Tracy McDonald"));
+		//Test that all players are queried
+		Assert.assertEquals(queryTestGame.handleSuggestion("Marshall Eriksen", "MacLaren's Pub", "Red Cowboy Boots", queryTestGame.getPerson(0)), new Card('P', "Tracy McDonald"));
+		
+	}
 }
