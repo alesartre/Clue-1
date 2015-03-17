@@ -4,6 +4,8 @@ package clueGame;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Random;
 
 
 
@@ -26,19 +28,25 @@ public abstract class Player {
 	}
 	
 	public Card disproveSuggestion(String person, String room, String weapon) {
+		ArrayList<Card> choices = new ArrayList<Card>();
 		for(Card c: cardList){
+			
 			if(c.getName().equals(person)){
-				return c;
+				choices.add(c);
 			}
 			else if(c.getName().equals(room)){
-				return c;
+				choices.add(c);
 			}
 			else if(c.getName().equals(weapon)){
-				return c;
+				choices.add(c);
 			}
 		}
-		
+		if(choices.size() != 0){
+			int rand = new Random().nextInt(choices.size());
+			return choices.get(rand);
+		}
 		return null;
+		
 	}
 	
 	public Color convertColor(String strColor) {
