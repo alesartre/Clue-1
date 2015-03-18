@@ -193,6 +193,10 @@ public class ClueGame {
 		}
 		return null;
 	}
+	
+	public boolean checkAccusation(ArrayList<Card> verdict){
+		return false;
+	}
 
 	//Testing only
 	public void setPeople(ArrayList<Player> people) {

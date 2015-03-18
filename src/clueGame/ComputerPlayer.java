@@ -16,6 +16,7 @@ public class ComputerPlayer extends Player{
 	}
 
 	private char lastRoomVisited;
+	private ArrayList<Card> seen;
 	
 	public BoardCell pickLocation(HashSet<BoardCell> targets) {
 		//System.out.println(targets.size());
@@ -56,7 +57,8 @@ public class ComputerPlayer extends Player{
 		lastRoomVisited = x;
 	}
 	
-	public void createSuggestion() {
+	public ArrayList<Card> createSuggestion() {
+		return null;
 		
 	}
 	

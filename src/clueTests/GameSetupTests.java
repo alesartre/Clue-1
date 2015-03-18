@@ -266,7 +266,6 @@ public class GameSetupTests {
 			else 
 				fail();
 		}
-		System.out.println(location1+location2+location3+location5+location6+location4);
 		Assert.assertEquals(100, location1+location2+location3+location5+location6+location4);
 		Assert.assertTrue(location1>7);
 		Assert.assertTrue(location2>7);
@@ -276,5 +275,29 @@ public class GameSetupTests {
 		Assert.assertTrue(location6>7);
 		
 	}
+	
+	@Test
+	public void computerSuggestionTrue(){
+		ComputerPlayer p1 = new ComputerPlayer();
+		for(Card c : game.getDeck()){
+			if(!c.equals(new Card('P',"Ted Mosbey"))&&!c.equals(new Card('W', "Ducky Tie"))&&!c.equals(new Card('R', "MaClaren's Pub"))){	
+				p1.updateSeen(c);
+			}
+		}
+		Assert.assertTrue(game.checkAccusation(p1.createSuggestion()));
+	}
+	
+	@Test
+	public void computerSuggestionRandom(){
+		ComputerPlayer p1 = new ComputerPlayer();
+		p1.updateSeen(game.getDeck().get(2));
+		p1.updateSeen(game.getDeck().get(7));
+		
+		Assert.assertFalse(p1.createSuggestion().contains(game.getDeck().get(2)));
+		Assert.assertFalse(p1.createSuggestion().contains(game.getDeck().get(7)));
+		
+		
+	}
+	
 }
 
