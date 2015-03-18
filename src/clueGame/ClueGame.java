@@ -19,8 +19,8 @@ public class ClueGame {
 	
 	public ClueGame(){
 		super();
-		layoutFileName = "ClueLayout.csv";
-		legendFileName = "ClueLegend.txt";
+		layoutFileName = "Board.csv";
+		legendFileName = "Legend.txt";
 	}
 	
 	private Map<Character, String> rooms;

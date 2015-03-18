@@ -1,6 +1,8 @@
 package clueGame;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Random;
 import java.util.Set;
 
 public class ComputerPlayer extends Player{
@@ -15,7 +17,33 @@ public class ComputerPlayer extends Player{
 
 	private char lastRoomVisited;
 	
-	public BoardCell pickLocation(Set<BoardCell> targets) {
+	public BoardCell pickLocation(HashSet<BoardCell> targets) {
+		//System.out.println(targets.size());
+		boolean rem = false;
+		BoardCell temp = null;
+		for(BoardCell c: targets){
+			if(c.isDoorway()){
+					if(((RoomCell)c).getInitial() == lastRoomVisited){
+						temp = c;
+						rem = true;
+					}
+					else{
+						return c;
+					}
+			}
+		}
+		if(rem == true){
+			targets.remove(temp);
+		}
+		//System.out.println(targets.size());
+		int R = new Random().nextInt(targets.size());
+		int i = 0;
+		for(BoardCell c: targets){
+			if(R==i){
+				return c;
+			}
+			i++;
+		}
 		return null;
 		
 	}

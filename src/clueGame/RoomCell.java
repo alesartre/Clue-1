@@ -38,7 +38,7 @@ public class RoomCell extends BoardCell  {
 	
 	private Character initial;
 	private DoorDirection doorDirection;
-	private boolean isDoor;
+	private boolean isDoor = false;
 
 	@Override
 	public boolean isRoom(){

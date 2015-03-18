@@ -23,7 +23,7 @@ public class GameSetupTests {
 	private static ArrayList<Card> testdeck;
 	@BeforeClass
 	public static void setup(){
-		game = new ClueGame("ClueLayout.csv", "ClueLegend.txt");
+		game = new ClueGame();
 		game.loadConfigFiles(); // This function creates the board, loads the rooms, cards, and the people
 		game.getBoard().calcAdjacencies();
 		testdeck = new ArrayList<Card>();
@@ -231,7 +231,7 @@ public class GameSetupTests {
 	@Test
 	public void targetLocationVisitedRoom(){//same as targetLocationsRandom but a list with a door is passed
 		ComputerPlayer p1 = new ComputerPlayer();
-		p1.setVisited('L');
+		p1.setVisited('C');
 		game.getBoard().calcTargets(10, 15, 2);
 		int location1 = 0;
 		int location2 = 0;
@@ -240,7 +240,11 @@ public class GameSetupTests {
 		int location5 = 0;
 		int location6 = 0;
 		for(int i =0; i<100; i++){
+			
 			BoardCell choice = p1.pickLocation(game.getBoard().getTargets());
+			System.out.println(choice.getRow());
+			System.out.println(choice.getCol());
+			System.out.println("-----------");
 			if(choice == game.getBoard().getCellAt(10,17)){
 				location1++;
 			}
@@ -262,7 +266,8 @@ public class GameSetupTests {
 			else 
 				fail();
 		}
-		Assert.assertEquals(100, location1+location2+location3+location5+location6);
+		System.out.println(location1+location2+location3+location5+location6+location4);
+		Assert.assertEquals(100, location1+location2+location3+location5+location6+location4);
 		Assert.assertTrue(location1>7);
 		Assert.assertTrue(location2>7);
 		Assert.assertTrue(location3>7);
