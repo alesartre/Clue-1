@@ -21,13 +21,17 @@ public class Solution {
 	
 	public boolean accuse(Card w, Card p, Card r){
 		if(!w.getName().equals(weapon)){
+			System.out.println(w.getName());
+			System.out.println(weapon);
 			return false;
-		
+			
 		}
 		else if(!p.getName().equals(person)){
+			System.out.println("person is wrong");
 			return false;
 		}
 		else if(!r.getName().equals(room)){
+			System.out.println("room is wrong");
 			return false;
 		}
 		else{

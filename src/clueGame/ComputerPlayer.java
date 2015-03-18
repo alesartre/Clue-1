@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
+import clueGame.Card.CardType;
+
 public class ComputerPlayer extends Player{
 	public ComputerPlayer(String name, String color, int row, int col) {
 		super(name, color, row, col);
@@ -16,7 +18,7 @@ public class ComputerPlayer extends Player{
 	}
 
 	private char lastRoomVisited;
-	private ArrayList<Card> seen;
+	private ArrayList<Card> seen = new ArrayList<Card>();
 	
 	public BoardCell pickLocation(HashSet<BoardCell> targets) {
 		//System.out.println(targets.size());
@@ -57,13 +59,47 @@ public class ComputerPlayer extends Player{
 		lastRoomVisited = x;
 	}
 	
-	public ArrayList<Card> createSuggestion() {
-		return null;
+	//LastRoom Visited must be updated before a suggestion can be made after a computer player moves into a room
+	public ArrayList<Card> createSuggestion(ArrayList<Card> deck) {
+		ArrayList<Card> accuse = new ArrayList<Card>();
+		Set<Card> weapons = new HashSet<Card>();
+		Set<Card> peoples = new HashSet<Card>();
+		Set<Card> rooms = new HashSet<Card>();
+		for(Card c : deck){
+			if(c.getCardType()== CardType.WEAPON && !seen.contains(c)){
+				weapons.add(c);
+			}
+			else if(c.getCardType()==CardType.PERSON && !seen.contains(c)){
+				peoples.add(c);
+			}	
+		}
 		
+		int W = new Random().nextInt(weapons.size());//get weapon
+		int P = new Random().nextInt(peoples.size());
+		
+		int i = 0;
+		for(Card c : weapons){
+			if(i==W){
+				accuse.add(c);
+			}
+			i=i+1;
+		}
+		i=0;
+		for(Card c : peoples){
+			if(i==P){
+				accuse.add(c);
+			}
+			i = i+1;
+		}
+		System.out.println(lastRoomVisited);
+		System.out.println(ClueGame.letterToName(lastRoomVisited));
+		accuse.add(new Card('R',ClueGame.letterToName(lastRoomVisited)));
+		System.out.println(accuse.get(2));
+		return accuse;
 	}
 	
-	public void updateSeen(Card seen) {
-		
+	public void updateSeen(Card x) {
+		seen.add(x);
 	}
 
 }

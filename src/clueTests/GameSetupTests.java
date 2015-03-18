@@ -279,12 +279,14 @@ public class GameSetupTests {
 	@Test
 	public void computerSuggestionTrue(){
 		ComputerPlayer p1 = new ComputerPlayer();
+		p1.setVisited('M');
+		game.setSolution(new Card('W',"Ducky Tie"),new Card('P', "Ted Mosby"),new Card('R', "MacLaren's Pub"));
 		for(Card c : game.getDeck()){
-			if(!c.equals(new Card('P',"Ted Mosbey"))&&!c.equals(new Card('W', "Ducky Tie"))&&!c.equals(new Card('R', "MaClaren's Pub"))){	
+			if(!c.equals(new Card('P',"Ted Mosby"))&&!c.equals(new Card('W', "Ducky Tie"))&&!c.equals(new Card('R', "MacLaren's Pub"))){	
 				p1.updateSeen(c);
 			}
 		}
-		Assert.assertTrue(game.checkAccusation(p1.createSuggestion()));
+		Assert.assertTrue(game.checkAccusation(p1.createSuggestion(game.getDeck())));
 	}
 	
 	@Test
@@ -293,8 +295,8 @@ public class GameSetupTests {
 		p1.updateSeen(game.getDeck().get(2));
 		p1.updateSeen(game.getDeck().get(7));
 		
-		Assert.assertFalse(p1.createSuggestion().contains(game.getDeck().get(2)));
-		Assert.assertFalse(p1.createSuggestion().contains(game.getDeck().get(7)));
+		Assert.assertFalse(p1.createSuggestion(game.getDeck()).contains(game.getDeck().get(2)));
+		Assert.assertFalse(p1.createSuggestion(game.getDeck()).contains(game.getDeck().get(7)));
 		
 		
 	}

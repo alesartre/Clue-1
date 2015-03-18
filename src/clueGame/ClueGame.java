@@ -23,13 +23,14 @@ public class ClueGame {
 		legendFileName = "Legend.txt";
 	}
 	
-	private Map<Character, String> rooms;
+	private static Map<Character, String> rooms;
 	private String layoutFileName;
 	private String legendFileName;
 	private Board board;
 	private ArrayList<Card> deck;
 	private ArrayList<Player> people;
 	private ArrayList<Card> dealt;
+	private Solution solved;
 	
 	public void loadConfigFiles(){
 		try {
@@ -144,7 +145,7 @@ public class ClueGame {
 			i = i+1;
 		}
 		
-		Solution solved = new Solution(temp, temp2, temp3);
+		solved = new Solution(temp, temp2, temp3);
 		
 		dealt = new ArrayList<Card>();
 		dealt.add(temp);
@@ -182,6 +183,10 @@ public class ClueGame {
 		return deck;
 	}
 	
+	public static String letterToName(char letter){
+		return rooms.get(letter);
+	}
+	
 	public Card handleSuggestion(String person, String room, String weapon, ArrayList<Player> players, int currentPlayer){
 		int player = currentPlayer + 1;
 		while(player%players.size() != currentPlayer){
@@ -195,12 +200,16 @@ public class ClueGame {
 	}
 	
 	public boolean checkAccusation(ArrayList<Card> verdict){
-		return false;
+		return solved.accuse(verdict.get(0), verdict.get(1), verdict.get(2));
 	}
 
 	//Testing only
 	public void setPeople(ArrayList<Player> people) {
 		this.people = people;
+	}
+	
+	public void setSolution(Card w, Card p, Card r){
+		solved = new Solution(w,p,r);
 	}
 
 }
