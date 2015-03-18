@@ -8,6 +8,7 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import clueGame.BoardCell;
 import clueGame.Card;
 import clueGame.ClueGame;
 import clueGame.ComputerPlayer;
@@ -24,6 +25,7 @@ public class GameSetupTests {
 	public static void setup(){
 		game = new ClueGame("ClueLayout.csv", "ClueLegend.txt");
 		game.loadConfigFiles(); // This function creates the board, loads the rooms, cards, and the people
+		game.getBoard().calcAdjacencies();
 		testdeck = new ArrayList<Card>();
 		testdeck.add(new Card('P',"Barney Stinson"));
 		testdeck.add(new Card('W',"Ducky Tie"));
@@ -176,4 +178,98 @@ public class GameSetupTests {
 		Assert.assertEquals(queryTestGame.handleSuggestion("Marshall Eriksen", "MacLaren's Pub", "Red Cowboy Boots", queryTestGame.getPeople(), 0), new Card('R', "MacLaren's Pub"));
 		
 	}
+	
+	@Test
+	public void targetLocationsRandom(){//no doors
+		ComputerPlayer p1 = new ComputerPlayer();
+		game.getBoard().calcTargets(9, 7, 2);
+		int location1 = 0;
+		int location2 = 0;
+		int location3 = 0;
+		int location4 = 0;
+		int location5 = 0;
+		int location6 = 0;
+		for(int i =0; i<100; i++){
+			BoardCell choice = p1.pickLocation(game.getBoard().getTargets());
+			if(choice == game.getBoard().getCellAt(9,9)){
+				location1++;
+			}
+			else if(choice == game.getBoard().getCellAt(7,7)){
+				location2++;
+			}
+			else if(choice == game.getBoard().getCellAt(9,5)){
+				location3++;
+			}
+			else if(choice == game.getBoard().getCellAt(8,8)){
+				location4++;
+			}
+			else if (choice == game.getBoard().getCellAt(8,6)){
+				location5++;
+			}
+			else if(choice == game.getBoard().getCellAt(10, 6)){
+				location6++;
+			}
+			else 
+				fail();
+		}
+		Assert.assertEquals(100, location1+location2+location3+location4+location5+location6);
+		Assert.assertTrue(location1>7);
+		Assert.assertTrue(location2>7);
+		Assert.assertTrue(location3>7);
+		Assert.assertTrue(location4>7);
+		Assert.assertTrue(location5>7);
+		Assert.assertTrue(location6>7);
+	}
+	
+	@Test
+	public void targetLocationsRoomPref(){
+		ComputerPlayer p1 = new ComputerPlayer();
+		game.getBoard().calcTargets(7, 11, 4);//one door
+		Assert.assertEquals(p1.pickLocation(game.getBoard().getTargets()), game.getBoard().getCellAt(5, 12));
+	}
+	
+	@Test
+	public void targetLocationVisitedRoom(){//same as targetLocationsRandom but a list with a door is passed
+		ComputerPlayer p1 = new ComputerPlayer();
+		p1.setVisited('L');
+		game.getBoard().calcTargets(10, 15, 2);
+		int location1 = 0;
+		int location2 = 0;
+		int location3 = 0;
+		int location4 = 0;
+		int location5 = 0;
+		int location6 = 0;
+		for(int i =0; i<100; i++){
+			BoardCell choice = p1.pickLocation(game.getBoard().getTargets());
+			if(choice == game.getBoard().getCellAt(10,17)){
+				location1++;
+			}
+			else if(choice == game.getBoard().getCellAt(12,15)){
+				location2++;
+			}
+			else if(choice == game.getBoard().getCellAt(9,14)){
+				location3++;
+			}
+			else if(choice == game.getBoard().getCellAt(11,16)){
+				location4++;
+			}
+			else if(choice == game.getBoard().getCellAt(9,16)){
+				location5++;
+			}
+			else if(choice == game.getBoard().getCellAt(11,14)){
+				location6++;
+			}
+			else 
+				fail();
+		}
+		Assert.assertEquals(100, location1+location2+location3+location5+location6);
+		Assert.assertTrue(location1>7);
+		Assert.assertTrue(location2>7);
+		Assert.assertTrue(location3>7);
+		Assert.assertTrue(location4>7);
+		Assert.assertTrue(location5>7);
+		Assert.assertTrue(location6>7);
+		
+	}
 }
+

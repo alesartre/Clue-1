@@ -27,6 +27,10 @@ public abstract class Player {
 		
 	}
 	
+	public Player(){
+		super();
+	}
+	
 	public Card disproveSuggestion(String person, String room, String weapon) {
 		ArrayList<Card> choices = new ArrayList<Card>();
 		for(Card c: cardList){
