@@ -4,10 +4,12 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
+import javax.swing.*;
+import java.awt.*;
 
 //import experiment.BoardCell;
 
-public class Board {
+public class Board extends JPanel{
 	
 	Board(Map<Character, String> rooms, String layoutFileName ){
 		this.rooms = rooms;
@@ -28,6 +30,15 @@ public class Board {
 		
 		fillLayout(layoutFileName);
 		
+	}
+	
+	public void paintComponent(Graphics g){
+		super.paintComponent(g);
+		for (int i=0;i<numRows;i++){
+			for (int j=0;j<numCols;j++){
+				layout[i][j].draw(g, this);
+			}
+		}
 	}
 	
 	//Create board by filling layout array
