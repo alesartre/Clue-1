@@ -11,9 +11,10 @@ import java.awt.*;
 
 public class Board extends JPanel{
 	
-	Board(Map<Character, String> rooms, String layoutFileName ){
+	Board(Map<Character, String> rooms, String layoutFileName, ArrayList<Player> players){
 		this.rooms = rooms;
 		this.layoutFileName = layoutFileName;
+		this.players = players;
 	}
 	
 	private String layoutFileName;
@@ -24,6 +25,7 @@ public class Board extends JPanel{
 	private int numCols;
 	private Set<BoardCell> visited;
 	private Set<BoardCell> targets;
+	private ArrayList<Player> players;
 	private Map<BoardCell, LinkedList<BoardCell>> adjMtx;
 	
 	public void loadBoardConfig() throws BadConfigFormatException{
@@ -38,6 +40,9 @@ public class Board extends JPanel{
 			for (int j=0;j<numCols;j++){
 				layout[i][j].draw(g, this);
 			}
+		}
+		for(int i = 0; i < players.size(); i++){
+			players.get(i).draw(g);
 		}
 	}
 	

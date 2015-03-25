@@ -1,26 +1,38 @@
 package clueGame;
 
+import java.awt.BorderLayout;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
+import javax.swing.JFrame;
+
 import clueGame.Card.CardType;
 
-public class ClueGame {
+public class ClueGame extends JFrame{
 	
 	public ClueGame(String layoutFileName, String legendFileName){
 		super();
 		this.layoutFileName = layoutFileName;
 		this.legendFileName = legendFileName;
 		rooms = new HashMap<Character, String>();
-		board = new Board(rooms, layoutFileName);
+		board = new Board(rooms, layoutFileName, people);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setTitle("Clue Game");
+		setSize(1000, 1000);
+
+		
 	}
 	
 	public ClueGame(){
 		super();
 		layoutFileName = "Board.csv";
 		legendFileName = "Legend.txt";
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setTitle("Clue Game");
+		setSize(1000, 1000);
+
 	}
 	
 	private static Map<Character, String> rooms;
@@ -35,9 +47,10 @@ public class ClueGame {
 	public void loadConfigFiles(){
 		try {
 			loadRoomConfig();
-			board = new Board(rooms, layoutFileName);
-			board.loadBoardConfig();
 			loadPeople("HIMYM_CHARACTERS.txt");
+			board = new Board(rooms, layoutFileName, people);
+			board.loadBoardConfig();
+			drawBoard(board);
 			loadCardConfig("HIMYM_CARDS.txt");
 			deal();
 		} catch (Exception e) {
@@ -98,6 +111,11 @@ public class ClueGame {
 			deck.add(new Card(temp1[0].charAt(0),temp1[1].trim()));
 		}
 		
+	}
+	
+	public void drawBoard(Board b){
+		add(b, BorderLayout.CENTER);
+		setSize(600, 600);
 	}
 	
 	public void deal(){
@@ -210,6 +228,12 @@ public class ClueGame {
 	
 	public void setSolution(Card w, Card p, Card r){
 		solved = new Solution(w,p,r);
+	}
+	
+	public static void main(String[] args){
+		ClueGame game = new ClueGame();
+		game.loadConfigFiles();
+		game.setVisible(true);
 	}
 
 }

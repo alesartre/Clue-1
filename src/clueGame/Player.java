@@ -3,6 +3,7 @@ package clueGame;
 
 
 import java.awt.Color;
+import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Random;
@@ -12,6 +13,9 @@ import java.util.Random;
 
 
 public abstract class Player {
+	
+	public final int CELL_DIMENSION = 20;
+	
 	private String name;
 	private ArrayList<Card> cardList = new ArrayList<Card>();
 	private int startR;
@@ -29,6 +33,11 @@ public abstract class Player {
 	
 	public Player(){
 		super();
+	}
+	
+	public void draw(Graphics g){
+		g.setColor(color);
+		g.fillOval(startC*CELL_DIMENSION, startR*CELL_DIMENSION, CELL_DIMENSION, CELL_DIMENSION);
 	}
 	
 	public Card disproveSuggestion(String person, String room, String weapon) {
