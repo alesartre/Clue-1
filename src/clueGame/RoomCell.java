@@ -67,16 +67,16 @@ public class RoomCell extends BoardCell  {
 		if (isDoorway()) {
 			g.setColor(Color.BLUE);
 			if (getDoorDirection()==DoorDirection.DOWN) {
-				g.fillRect(getCol()*CELL_DIMENSION, getRow()*CELL_DIMENSION + (int)0.8*CELL_DIMENSION, CELL_DIMENSION, (int)0.2*CELL_DIMENSION);
+				g.fillRect(getCol()*CELL_DIMENSION, getRow()*CELL_DIMENSION + (int)(0.8*CELL_DIMENSION), CELL_DIMENSION, (int)(0.2*CELL_DIMENSION));
 			}
 			else if (getDoorDirection()==DoorDirection.UP) {
-				g.fillRect(getCol()*CELL_DIMENSION, getRow()*CELL_DIMENSION, CELL_DIMENSION, (int)0.2*CELL_DIMENSION);
+				g.fillRect(getCol()*CELL_DIMENSION, getRow()*CELL_DIMENSION, CELL_DIMENSION, (int)(0.2*CELL_DIMENSION));
 			}
 			else if (getDoorDirection()==DoorDirection.LEFT) {
-				g.fillRect(getCol()*CELL_DIMENSION, getRow()*CELL_DIMENSION, (int)0.2*CELL_DIMENSION, CELL_DIMENSION);
+				g.fillRect(getCol()*CELL_DIMENSION, getRow()*CELL_DIMENSION, (int)(0.2*CELL_DIMENSION), CELL_DIMENSION);
 			}
 			else if (getDoorDirection()==DoorDirection.RIGHT) {
-				g.fillRect(getCol()*CELL_DIMENSION + (int)0.8*CELL_DIMENSION, getRow()*CELL_DIMENSION, (int)0.2*CELL_DIMENSION, CELL_DIMENSION);
+				g.fillRect(getCol()*CELL_DIMENSION + (int)(0.8*CELL_DIMENSION), getRow()*CELL_DIMENSION, (int)(0.2*CELL_DIMENSION), CELL_DIMENSION);
 			}
 		}
 	}

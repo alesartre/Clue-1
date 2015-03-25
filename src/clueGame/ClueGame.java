@@ -44,6 +44,7 @@ public class ClueGame extends JFrame{
 	private ArrayList<Card> dealt;
 	private Solution solved;
 	
+	
 	public void loadConfigFiles(){
 		try {
 			loadRoomConfig();
