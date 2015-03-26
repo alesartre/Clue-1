@@ -234,7 +234,10 @@ public class ClueGame extends JFrame{
 	public static void main(String[] args){
 		ClueGame game = new ClueGame();
 		game.loadConfigFiles();
+		game.getBoard().calcAdjacencies();
 		game.setVisible(true);
+		ControlGui gui = new ControlGui(game);
+		gui.setVisible(true);
 	}
 
 }

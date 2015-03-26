@@ -117,6 +117,9 @@ public abstract class Player {
 		return true;
 	}
 	
+	public String getName(){
+		return name;
+	}
 	
 	//For Testing
 	public ArrayList<Card> getCardList(){

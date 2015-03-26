@@ -1,6 +1,11 @@
+package clueGame;
+
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -13,8 +18,11 @@ import javax.swing.border.TitledBorder;
 
 public class ControlGui extends JFrame {
 	
+	private JButton showNotes;
+	private DetectiveNotes notes;
+	private ClueGame game;
 	
-	public ControlGui(){
+	public ControlGui(ClueGame game){
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Control");
 		setSize(1000,300);
@@ -23,6 +31,9 @@ public class ControlGui extends JFrame {
 		add(panel);
 		JPanel panel2 = createLowerPanel();
 		add(panel2);
+		this.game = game;
+		
+		notes = new DetectiveNotes(game);
 		
 	}
 	
@@ -38,8 +49,11 @@ public class ControlGui extends JFrame {
 		panel.add(turnPanel);
 		JButton nextPlayer = new JButton("Next Player");
 		JButton makeAccusation = new JButton("Make an accusation");
+		JButton showNotes = new JButton("Show Detective Notes");
 		panel.add(nextPlayer);
 		panel.add(makeAccusation);
+		panel.add(showNotes);
+		showNotes.addActionListener(new ButtonListener());
 		return panel;
 		
 	}
@@ -83,17 +97,20 @@ public class ControlGui extends JFrame {
 		
 	}
 	
-	
-	
-	
-	public static void main(String[] args){
+	private class ButtonListener implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+			if(e.getSource() == showNotes){
+				notes.showstuff();
+			}
+			
+		}
 		
-		ControlGui gui = new ControlGui();
-		gui.setVisible(true);
+		
 		
 	}
 	
 	
+
 	
 	
 	
