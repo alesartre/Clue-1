@@ -23,6 +23,7 @@ public class ClueGame extends JFrame{
 		setLayout(new GridLayout(2,1));
 		setTitle("Clue Game");
 		setSize(1000, 1000);
+		//.
 
 		
 	}
