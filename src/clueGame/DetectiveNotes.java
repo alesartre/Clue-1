@@ -5,10 +5,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.swing.JCheckBox;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
@@ -16,11 +13,31 @@ import clueGame.Card.CardType;
 
 public class DetectiveNotes extends JDialog {
 	private ClueGame game;
+	private Set<Card> weps;
+	private Set<Card> peeps;
+	private Set<Card> roomies;
 	public DetectiveNotes(ClueGame game){
 		setTitle("Detective Notes");
 		setSize(600,650);
 		setLayout(new GridLayout(3,2));
 		this.game = game;
+		
+		ArrayList<Card> deck = game.getDeck();
+		weps = new HashSet<Card>();
+		peeps = new HashSet<Card>();
+		roomies = new HashSet<Card>();
+		for(Card c : deck){
+			if(c.getCardType()== CardType.WEAPON){
+				weps.add(c);
+			}
+			else if(c.getCardType()==CardType.PERSON){
+				peeps.add(c);
+			}
+			else if(c.getCardType()==CardType.ROOM){
+				roomies.add(c);
+			}
+		}
+		
 		JPanel people = createPeople();
 		JPanel weapons = createWeapons();
 		JPanel rooms = createRooms();
@@ -40,10 +57,9 @@ public class DetectiveNotes extends JDialog {
 	}
 	
 	private JPanel createPeople(){
-		ArrayList<Player> players = game.getPeople();
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder (new EtchedBorder(), "People"));
-		for( Player p: players){
+		for( Card p: peeps){
 			panel.add(new JCheckBox(p.getName()));
 		}
 		return panel;
@@ -51,16 +67,9 @@ public class DetectiveNotes extends JDialog {
 	}
 	
 	private JPanel createWeapons(){
-		ArrayList<Card> deck = game.getDeck();
-		Set<Card> weapons = new HashSet<Card>();
-		for(Card c : deck){
-			if(c.getCardType()== CardType.WEAPON){
-				weapons.add(c);
-			}
-		}
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder (new EtchedBorder(), "Weapons"));
-		for(Card c: weapons){
+		for(Card c: weps){
 			panel.add(new JCheckBox(c.getName()));
 		}
 		return panel;
@@ -68,16 +77,9 @@ public class DetectiveNotes extends JDialog {
 	}
 	
 	private JPanel createRooms(){
-		ArrayList<Card> deck = game.getDeck();
-		Set<Card> rooms = new HashSet<Card>();
-		for(Card c : deck){
-			if(c.getCardType()== CardType.ROOM){
-				rooms.add(c);
-			}
-		}
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder (new EtchedBorder(), "Weapons"));
-		for(Card c: rooms){
+		for(Card c: roomies){
 			panel.add(new JCheckBox(c.getName()));
 		}
 		return panel;
@@ -86,12 +88,22 @@ public class DetectiveNotes extends JDialog {
 	private JPanel createPersonGuess(){
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder (new EtchedBorder(), "Person Guess"));
+		JComboBox<String> combo = new JComboBox<String>();
+		for(Card c: peeps){
+			combo.addItem(c.getName());
+		}
+		panel.add(combo);
 		return panel;
 	}
 	
 	private JPanel createWeaponGuess(){
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder (new EtchedBorder(), "Weapons Guess"));
+		JComboBox<String> combo = new JComboBox<String>();
+		for(Card c: weps){
+			combo.addItem(c.getName());
+		}
+		panel.add(combo);
 		return panel;
 		
 	}
@@ -99,6 +111,11 @@ public class DetectiveNotes extends JDialog {
 	private JPanel createRoomGuess(){
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder (new EtchedBorder(), "RoomGuess"));
+		JComboBox<String> combo = new JComboBox<String>();
+		for(Card c: peeps){
+			combo.addItem(c.getName());
+		}
+		panel.add(combo);
 		return panel;
 	}
 	
