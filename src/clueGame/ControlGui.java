@@ -49,7 +49,7 @@ public class ControlGui extends JFrame {
 		panel.add(turnPanel);
 		JButton nextPlayer = new JButton("Next Player");
 		JButton makeAccusation = new JButton("Make an accusation");
-		JButton showNotes = new JButton("Show Detective Notes");
+		showNotes = new JButton("Show Detective Notes");
 		panel.add(nextPlayer);
 		panel.add(makeAccusation);
 		panel.add(showNotes);
@@ -100,6 +100,7 @@ public class ControlGui extends JFrame {
 	private class ButtonListener implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource() == showNotes){
+				System.out.println("HERE");
 				notes.showstuff();
 			}
 			

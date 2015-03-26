@@ -1,6 +1,7 @@
 package clueGame;
 
 import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -19,6 +20,7 @@ public class ClueGame extends JFrame{
 		rooms = new HashMap<Character, String>();
 		board = new Board(rooms, layoutFileName, people);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setLayout(new GridLayout(2,1));
 		setTitle("Clue Game");
 		setSize(1000, 1000);
 
@@ -231,6 +233,13 @@ public class ClueGame extends JFrame{
 		solved = new Solution(w,p,r);
 	}
 	
+	
+	
+	/*************************************/
+	/*************************************/
+	// 			Main is here 			 //
+	/*************************************/
+	/*************************************/
 	public static void main(String[] args){
 		ClueGame game = new ClueGame();
 		game.loadConfigFiles();

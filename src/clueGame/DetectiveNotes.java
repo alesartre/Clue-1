@@ -1,6 +1,8 @@
 package clueGame;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -16,12 +18,17 @@ public class DetectiveNotes extends JDialog {
 	private Set<Card> weps;
 	private Set<Card> peeps;
 	private Set<Card> roomies;
+	private JButton hideButton;
+	
+	
 	public DetectiveNotes(ClueGame game){
 		setTitle("Detective Notes");
-		setSize(600,650);
-		setLayout(new GridLayout(3,2));
+		setSize(600,660);
+		//setLayout(new GridLayout(3,2));
 		this.game = game;
 		
+		//Separate the deck into three smaller sets of weapon, people, and room cards
+		//to use to make different parts of the detective notes
 		ArrayList<Card> deck = game.getDeck();
 		weps = new HashSet<Card>();
 		peeps = new HashSet<Card>();
@@ -37,20 +44,28 @@ public class DetectiveNotes extends JDialog {
 				roomies.add(c);
 			}
 		}
-		
+		JPanel mainPanel = new JPanel();
+		GridLayout grid = new GridLayout(0,2);
+		mainPanel.setLayout(grid);
 		JPanel people = createPeople();
 		JPanel weapons = createWeapons();
 		JPanel rooms = createRooms();
 		JPanel personGuess = createPersonGuess();
 		JPanel weaponGuess = createWeaponGuess();
 		JPanel roomGuess = createRoomGuess();
+		hideButton = new JButton("HIDE");
+		hideButton.addActionListener(new ButtonListener());
 		
-		add(people);
-		add(personGuess);
-		add(weapons);
-		add(weaponGuess);
-		add(rooms);
-		add(roomGuess);
+		
+		
+		mainPanel.add(people);
+		mainPanel.add(personGuess, BorderLayout.NORTH);
+		mainPanel.add(weapons);
+		mainPanel.add(weaponGuess);
+		mainPanel.add(rooms);
+		mainPanel.add(roomGuess);
+		add(mainPanel, BorderLayout.CENTER);
+		add(hideButton, BorderLayout.SOUTH);
 		
 		setVisible(true);
 		
@@ -120,8 +135,16 @@ public class DetectiveNotes extends JDialog {
 	}
 	
 	public void showstuff(){
-		//setVisible(true);
+		setVisible(true);
 	}
 	
-	
+	private class ButtonListener implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+			if(e.getSource() == hideButton){
+				setVisible(false);
+			}
+			
+		}
+		
+	}
 }
