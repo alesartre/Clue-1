@@ -8,6 +8,9 @@ import java.util.Set;
 import clueGame.Card.CardType;
 
 public class ComputerPlayer extends Player{
+	private char lastRoomVisited;
+	private ArrayList<Card> seen = new ArrayList<Card>();
+	
 	public ComputerPlayer(String name, String color, int row, int col) {
 		super(name, color, row, col);
 		// TODO Auto-generated constructor stub
@@ -16,9 +19,6 @@ public class ComputerPlayer extends Player{
 	public ComputerPlayer(){
 		super();
 	}
-
-	private char lastRoomVisited;
-	private ArrayList<Card> seen = new ArrayList<Card>();
 	
 	// Chooses the cell that the computer player will move to.
 	public BoardCell pickLocation(HashSet<BoardCell> targets) {
@@ -49,15 +49,6 @@ public class ComputerPlayer extends Player{
 			i++;
 		}
 		return null;
-		
-	}
-	
-	public char getVisited(){
-		return lastRoomVisited;
-	}
-	
-	public void setVisited(char x){
-		lastRoomVisited = x;
 	}
 	
 	//LastRoom Visited must be updated before a suggestion can be made after a computer player moves into a room
@@ -102,5 +93,12 @@ public class ComputerPlayer extends Player{
 	public void updateSeen(Card x) {
 		seen.add(x);
 	}
-
+	
+	public char getVisited(){
+		return lastRoomVisited;
+	}
+	
+	public void setVisited(char x){
+		lastRoomVisited = x;
+	}
 }

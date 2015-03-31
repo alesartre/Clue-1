@@ -12,6 +12,14 @@ import javax.swing.JFrame;
 import clueGame.Card.CardType;
 
 public class ClueGame extends JFrame{
+	private static Map<Character, String> rooms;
+	private String layoutFileName;
+	private String legendFileName;
+	private Board board;
+	private ArrayList<Card> deck;
+	private ArrayList<Player> people;
+	private ArrayList<Card> dealt;
+	private Solution solved;	
 	
 	public ClueGame(String layoutFileName, String legendFileName){
 		super();
@@ -37,15 +45,6 @@ public class ClueGame extends JFrame{
 		setSize(board.getWidth(), board.getHeight());
 		System.out.println("board: " + board.getSize());
 	}
-	
-	private static Map<Character, String> rooms;
-	private String layoutFileName;
-	private String legendFileName;
-	private Board board;
-	private ArrayList<Card> deck;
-	private ArrayList<Player> people;
-	private ArrayList<Card> dealt;
-	private Solution solved;
 	
 	// Call all methods to read and parse config files.
 	public void loadConfigFiles(){
@@ -119,10 +118,6 @@ public class ClueGame extends JFrame{
 		
 	}
 	
-	public void drawBoard(Board b){
-		add(b, BorderLayout.CENTER);
-	}
-	
 	// Deal the deck to players.
 	public void deal(){
 		Set<Card> weapons = new HashSet<Card>();
@@ -186,29 +181,7 @@ public class ClueGame extends JFrame{
 					i++;
 				}
 			}
-		}
-		
-		
-	}
-	
-	public Board getBoard(){
-		return board;
-	}
-	
-	public ArrayList<Player> getPeople(){
-		return people;
-	}
-	
-	public Player getPerson(int x){
-		return people.get(x);
-	}
-	
-	public ArrayList<Card> getDeck(){
-		return deck;
-	}
-	
-	public static String letterToName(char letter){
-		return rooms.get(letter);
+		}			
 	}
 	
 	// Circulates table to see if any player can disprove the current suggestion.
@@ -227,6 +200,30 @@ public class ClueGame extends JFrame{
 	// Check if a player's accusation is correct.
 	public boolean checkAccusation(ArrayList<Card> verdict){
 		return solved.accuse(verdict.get(0), verdict.get(1), verdict.get(2));
+	}
+	
+	public void drawBoard(Board b){
+		add(b, BorderLayout.CENTER);
+	}
+	
+	public static String letterToName(char letter){
+		return rooms.get(letter);
+	}
+	
+	public Board getBoard(){
+		return board;
+	}
+	
+	public ArrayList<Player> getPeople(){
+		return people;
+	}
+	
+	public Player getPerson(int x){
+		return people.get(x);
+	}
+	
+	public ArrayList<Card> getDeck(){
+		return deck;
 	}
 
 	//Testing only

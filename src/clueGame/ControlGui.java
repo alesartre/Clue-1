@@ -17,7 +17,6 @@ import javax.swing.border.TitledBorder;
 
 
 public class ControlGui extends JFrame {
-	
 	private JButton showNotes;
 	private DetectiveNotes notes;
 	private ClueGame game;
@@ -103,11 +102,7 @@ public class ControlGui extends JFrame {
 				System.out.println("HERE");
 				notes.showStuff();
 			}
-			
-		}
-		
-		
-		
+		}	
 	}
 	
 	

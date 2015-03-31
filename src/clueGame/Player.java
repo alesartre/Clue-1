@@ -13,29 +13,21 @@ import java.util.Random;
 
 
 public abstract class Player {
-	
 	private String name;
 	private ArrayList<Card> cardList = new ArrayList<Card>();
 	private int startR;
 	private int startC;
 	private Color color;
 	
-	
 	public Player(String name, String color, int row, int col){
 		this.name = name;
 		this.color = convertColor(color);
 		this.startR = row;
 		this.startC = col;
-		
 	}
 	
 	public Player(){
 		super();
-	}
-	
-	public void draw(Graphics g){
-		g.setColor(color);
-		g.fillOval(startC*Board.CELL_DIMENSION, startR*Board.CELL_DIMENSION, Board.CELL_DIMENSION, Board.CELL_DIMENSION);
 	}
 	
 	// If player has a card that can disprove current suggestion, choose one randomly from options and show.
@@ -71,6 +63,15 @@ public abstract class Player {
 			color = null; // Not defined } 
 		}
 		return color;
+	}
+	
+	public void draw(Graphics g){
+		g.setColor(color);
+		g.fillOval(startC*Board.CELL_DIMENSION, startR*Board.CELL_DIMENSION, Board.CELL_DIMENSION, Board.CELL_DIMENSION);
+	}
+	
+	public String getName(){
+		return name;
 	}
 
 	@Override
@@ -116,10 +117,6 @@ public abstract class Player {
 		return true;
 	}
 	
-	public String getName(){
-		return name;
-	}
-	
 	//For Testing
 	public ArrayList<Card> getCardList(){
 		return cardList;
@@ -128,6 +125,4 @@ public abstract class Player {
 	public void setCardList(ArrayList<Card> cardList) {
 		this.cardList = cardList;
 	}
-
-
 }

@@ -3,7 +3,6 @@ package clueGame;
 import java.util.ArrayList;
 
 public class Solution {
-
 	private String person;
 	private String weapon;
 	private String room;
@@ -40,10 +39,7 @@ public class Solution {
 		}
 	}
 
-
 	public ArrayList<Card> getSolution(){
 		return solution;
 	}
-	
-	
 }

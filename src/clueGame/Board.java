@@ -104,10 +104,6 @@ public class Board extends JPanel{
 			System.out.println("IOException");
 		}
 	}
-
-	public BoardCell getCellAt(int row, int col){
-		return layout[row][col];
-	}
 	
 	// Calculate matrix of all cells adjacent to each other cell, stored in adjMtx.
 	public void calcAdjacencies(){
@@ -117,7 +113,7 @@ public class Board extends JPanel{
 			for(int col = 0; col < numCols; col++){
 				LinkedList <BoardCell> adjList = new LinkedList<BoardCell>();
 				if(getCellAt(row,col).isWalkway() || getCellAt(row,col).isDoorway()){
-					getWalkwayAdj(row, col, adjList);
+					calcWalkwayAdj(row, col, adjList);
 				} 
 				adjMtx.put(layout[row][col], adjList);
 			}
@@ -126,7 +122,7 @@ public class Board extends JPanel{
 	}
 
 	// Get all adjacent cells to a specified walkway cell.
-	public void getWalkwayAdj(int row, int col, LinkedList<BoardCell> adjList){
+	public void calcWalkwayAdj(int row, int col, LinkedList<BoardCell> adjList){
 		if (!(row - 1 < 0)){
 			if(getCellAt(row-1,col).isWalkway()){
 				adjList.add(getCellAt(row-1,col));
@@ -201,6 +197,10 @@ public class Board extends JPanel{
 		}
 	}
 
+	public BoardCell getCellAt(int row, int col){
+		return layout[row][col];
+	}
+	
 	public HashSet<BoardCell> getTargets(){
 		return (HashSet<BoardCell>) targets;
 	}

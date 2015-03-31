@@ -45,28 +45,6 @@ public class RoomCell extends BoardCell  {
 	private Character initial;
 	private DoorDirection doorDirection;
 	private boolean isDoor = false;
-
-	@Override
-	public boolean isRoom(){
-		return true;
-	}
-	
-	@Override
-	public boolean isDoorway(){
-		return isDoor;
-	}
-	
-	public DoorDirection getDoorDirection(){
-		return doorDirection;
-	}
-	
-	public char getInitial(){
-		return initial;
-	}
-	
-	public boolean isHasName() {
-		return hasName;
-	}
 	
 	@Override
 	public void draw(Graphics g, Board b) {
@@ -94,5 +72,27 @@ public class RoomCell extends BoardCell  {
 				g.fillRect(getCol()*Board.CELL_DIMENSION + (int)(0.8*Board.CELL_DIMENSION), getRow()*Board.CELL_DIMENSION, (int)(0.2*Board.CELL_DIMENSION), Board.CELL_DIMENSION);
 			}
 		}
+	}
+	
+	@Override
+	public boolean isRoom(){
+		return true;
+	}
+	
+	@Override
+	public boolean isDoorway(){
+		return isDoor;
+	}
+	
+	public DoorDirection getDoorDirection(){
+		return doorDirection;
+	}
+	
+	public char getInitial(){
+		return initial;
+	}
+	
+	public boolean isHasName() {
+		return hasName;
 	}
 }
