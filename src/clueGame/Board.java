@@ -18,7 +18,7 @@ public class Board extends JPanel{
 	}
 
 	private String layoutFileName;
-	public final static int CELL_DIMENSION = 32;
+	public final static int CELL_DIMENSION = 30;
 	public static int MAX_CELLS = 50;
 	private BoardCell[][] layout = new BoardCell[MAX_CELLS][MAX_CELLS];
 	public Map<Character,String> rooms;

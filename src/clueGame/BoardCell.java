@@ -14,7 +14,7 @@ public abstract class BoardCell {
 	}
 	
 	public void draw(Graphics g, Board b){
-		
+		g.fillRect(getCol()*Board.CELL_DIMENSION, getRow()*Board.CELL_DIMENSION, Board.CELL_DIMENSION, Board.CELL_DIMENSION);
 	}
 	
 	public boolean isRoom(){

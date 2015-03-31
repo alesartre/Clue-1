@@ -1,6 +1,7 @@
  package clueGame;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Graphics;
 
 public class RoomCell extends BoardCell  {
 	private boolean hasName = false;
@@ -55,7 +56,7 @@ public class RoomCell extends BoardCell  {
 		}
 		
 		g.setColor(Color.decode("#C2E0F2"));
-		g.fillRect(getCol()*Board.CELL_DIMENSION, getRow()*Board.CELL_DIMENSION, Board.CELL_DIMENSION, Board.CELL_DIMENSION);
+		super.draw(g, b);
 		
 		if (isDoorway()) {
 			g.setColor(Color.decode("#514F59"));
