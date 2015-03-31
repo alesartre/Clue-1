@@ -76,7 +76,7 @@ public class DetectiveNotes extends JDialog {
 		return panel;
 	}
 	
-	public void showstuff(){
+	public void showStuff(){
 		setVisible(true);
 	}
 	

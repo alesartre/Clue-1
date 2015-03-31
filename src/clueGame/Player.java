@@ -40,6 +40,7 @@ public abstract class Player {
 		g.fillOval(startC*CELL_DIMENSION, startR*CELL_DIMENSION, CELL_DIMENSION, CELL_DIMENSION);
 	}
 	
+	// If player has a card that can disprove current suggestion, choose one randomly from options and show.
 	public Card disproveSuggestion(String person, String room, String weapon) {
 		ArrayList<Card> choices = new ArrayList<Card>();
 		for(Card c: cardList){

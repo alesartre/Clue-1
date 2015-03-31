@@ -22,8 +22,7 @@ public class ClueGame extends JFrame{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(new GridLayout(2,1));
 		setTitle("Clue Game");
-		setSize(1000, 1000);
-		//.NOO		
+		setSize(1000, 1000);		
 	}
 	
 	public ClueGame(){
@@ -45,7 +44,7 @@ public class ClueGame extends JFrame{
 	private ArrayList<Card> dealt;
 	private Solution solved;
 	
-	
+	// Call all methods to read and parse config files.
 	public void loadConfigFiles(){
 		try {
 			loadRoomConfig();
@@ -87,6 +86,7 @@ public class ClueGame extends JFrame{
 		}
 	}
 	
+	// Load the players and designate one as a Human.
 	public void loadPeople(String textfile) throws FileNotFoundException{
 		FileReader charFile = new FileReader(textfile);
 		Scanner scan = new Scanner(charFile);
@@ -103,6 +103,7 @@ public class ClueGame extends JFrame{
 		
 	}
 	
+	// Load the deck, and shuffle
 	public void loadCardConfig(String textfile) throws FileNotFoundException {
 		FileReader cardFile = new FileReader(textfile);
 		Scanner scan = new Scanner(cardFile);
@@ -120,6 +121,7 @@ public class ClueGame extends JFrame{
 		setSize(600, 600);
 	}
 	
+	// Deal the deck to players.
 	public void deal(){
 		Set<Card> weapons = new HashSet<Card>();
 		Set<Card> peoples = new HashSet<Card>();
@@ -207,6 +209,7 @@ public class ClueGame extends JFrame{
 		return rooms.get(letter);
 	}
 	
+	// Circulates table to see if any player can disprove the current suggestion.
 	public Card handleSuggestion(String person, String room, String weapon, ArrayList<Player> players, int currentPlayer){
 		int player = currentPlayer + 1;
 		while(player%players.size() != currentPlayer){
@@ -219,6 +222,7 @@ public class ClueGame extends JFrame{
 		return null;
 	}
 	
+	// Check if a player's accusation is correct.
 	public boolean checkAccusation(ArrayList<Card> verdict){
 		return solved.accuse(verdict.get(0), verdict.get(1), verdict.get(2));
 	}
@@ -228,6 +232,7 @@ public class ClueGame extends JFrame{
 		this.people = people;
 	}
 	
+	// Choose the three cards that are the murder items.
 	public void setSolution(Card w, Card p, Card r){
 		solved = new Solution(w,p,r);
 	}

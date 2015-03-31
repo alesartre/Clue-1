@@ -19,6 +19,7 @@ public class Solution {
 		
 	}
 	
+	// Takes in an accusation as argument, checks against solution.
 	public boolean accuse(Card w, Card p, Card r){
 		if(!w.getName().equals(weapon)){
 			System.out.println(w.getName());

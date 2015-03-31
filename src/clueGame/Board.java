@@ -105,11 +105,11 @@ public class Board extends JPanel{
 		}
 	}
 
-
-
 	public BoardCell getCellAt(int row, int col){
 		return layout[row][col];
 	}
+	
+	// Calculate matrix of all cells adjacent to each other cell, stored in adjMtx.
 	public void calcAdjacencies(){
 
 		adjMtx = new HashMap<BoardCell,LinkedList<BoardCell>>();
@@ -125,6 +125,7 @@ public class Board extends JPanel{
 
 	}
 
+	// Get all adjacent cells to a specified walkway cell.
 	public void getWalkwayAdj(int row, int col, LinkedList<BoardCell> adjList){
 		if (!(row - 1 < 0)){
 			if(getCellAt(row-1,col).isWalkway()){
@@ -173,7 +174,7 @@ public class Board extends JPanel{
 		}
 	}
 
-
+	// Calculate potential cells player can move to based on number of steps rolled.
 	public void calcTargets(int row, int col, int steps){
 		visited = new HashSet<BoardCell>();
 		targets = new HashSet<BoardCell>();
@@ -181,6 +182,7 @@ public class Board extends JPanel{
 		findTargets(row, col, steps);
 	}
 
+	// Recursive call for calcTargets
 	public void findTargets(int row, int col, int steps){
 		for(BoardCell cell: getAdjList(row,col)){
 

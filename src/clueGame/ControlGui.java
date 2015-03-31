@@ -101,7 +101,7 @@ public class ControlGui extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource() == showNotes){
 				System.out.println("HERE");
-				notes.showstuff();
+				notes.showStuff();
 			}
 			
 		}
