@@ -10,16 +10,9 @@ import java.awt.*;
 //import experiment.BoardCell;
 
 public class Board extends JPanel{
-
-	Board(Map<Character, String> rooms, String layoutFileName, ArrayList<Player> players){
-		this.rooms = rooms;
-		this.layoutFileName = layoutFileName;
-		this.players = players;
-	}
-
-	private String layoutFileName;
 	public final static int CELL_DIMENSION = 30;
 	public static int MAX_CELLS = 50;
+	private String layoutFileName;
 	private BoardCell[][] layout = new BoardCell[MAX_CELLS][MAX_CELLS];
 	public Map<Character,String> rooms;
 	private int numRows;
@@ -28,6 +21,12 @@ public class Board extends JPanel{
 	private Set<BoardCell> targets;
 	private ArrayList<Player> players;
 	private Map<BoardCell, LinkedList<BoardCell>> adjMtx;
+	
+	Board(Map<Character, String> rooms, String layoutFileName, ArrayList<Player> players){
+		this.rooms = rooms;
+		this.layoutFileName = layoutFileName;
+		this.players = players;
+	}
 
 	public void loadBoardConfig() throws BadConfigFormatException{
 		fillLayout(layoutFileName);
@@ -57,15 +56,15 @@ public class Board extends JPanel{
 			System.out.println("File not found");
 		}
 		Scanner scan = new Scanner(fileIn);
-		String temp = "";
+		String scannedData = "";
 		int row = 0;
 		String[]cells;
 		int column = 0;
 
 		//For each line in the file
 		while(scan.hasNextLine()){
-			temp = scan.nextLine();
-			cells = temp.split(",");
+			scannedData = scan.nextLine();
+			cells = scannedData.split(",");
 
 			column = 0;
 			numCols = 0;
@@ -107,7 +106,6 @@ public class Board extends JPanel{
 	
 	// Calculate matrix of all cells adjacent to each other cell, stored in adjMtx.
 	public void calcAdjacencies(){
-
 		adjMtx = new HashMap<BoardCell,LinkedList<BoardCell>>();
 		for(int row = 0; row < numRows; row++){
 			for(int col = 0; col < numCols; col++){
@@ -124,47 +122,51 @@ public class Board extends JPanel{
 	// Get all adjacent cells to a specified walkway cell.
 	public void calcWalkwayAdj(int row, int col, LinkedList<BoardCell> adjList){
 		if (!(row - 1 < 0)){
-			if(getCellAt(row-1,col).isWalkway()){
-				adjList.add(getCellAt(row-1,col));
+			row = row - 1;
+			if(getCellAt(row,col).isWalkway()){
+				adjList.add(getCellAt(row,col));
 				//System.out.println("1");
 			}
-			else if(getCellAt(row-1,col).isDoorway()){
-				RoomCell roomy = (RoomCell) getCellAt(row-1,col);
+			else if(getCellAt(row,col).isDoorway()){
+				RoomCell roomy = (RoomCell) getCellAt(row,col);
 				if(roomy.getDoorDirection() == RoomCell.DoorDirection.DOWN){
-					adjList.add(getCellAt(row-1,col));
+					adjList.add(getCellAt(row,col));
 				}
 			}
 		}
 		if(!(row + 1 >= numRows)){
-			if(getCellAt(row+1,col).isWalkway()){
-				adjList.add(getCellAt(row+1,col));
+			row = row + 1;
+			if(getCellAt(row,col).isWalkway()){
+				adjList.add(getCellAt(row,col));
 				//System.out.println("2");
-			}else if(getCellAt(row+1,col).isDoorway()){
-				RoomCell roomy = (RoomCell) getCellAt(row+1,col);
+			}else if(getCellAt(row,col).isDoorway()){
+				RoomCell roomy = (RoomCell) getCellAt(row,col);
 				if(roomy.getDoorDirection() == RoomCell.DoorDirection.UP){
-					adjList.add(getCellAt(row+1,col));
+					adjList.add(getCellAt(row,col));
 				}
 			}
 		}
 		if (!(col-1 < 0)){
-			if(getCellAt(row,col-1).isWalkway()){
-				adjList.add(getCellAt(row,col-1));
+			col = col - 1;
+			if(getCellAt(row,col).isWalkway()){
+				adjList.add(getCellAt(row,col));
 				//System.out.println("3");
-			}else if(getCellAt(row,col-1).isDoorway()){
-				RoomCell roomy = (RoomCell) getCellAt(row,col-1);
+			}else if(getCellAt(row,col).isDoorway()){
+				RoomCell roomy = (RoomCell) getCellAt(row,col);
 				if(roomy.getDoorDirection() == RoomCell.DoorDirection.RIGHT){
-					adjList.add(getCellAt(row,col-1));
+					adjList.add(getCellAt(row,col));
 				}
 			}
 		}
 		if(!(col+1 >= numCols)){
-			if(getCellAt(row,col+1).isWalkway()){
-				adjList.add(getCellAt(row,col+1));
+			col = col + 1;
+			if(getCellAt(row,col).isWalkway()){
+				adjList.add(getCellAt(row,col));
 				//System.out.println("4");
-			}else if(getCellAt(row,col+1).isDoorway()){
-				RoomCell roomy = (RoomCell) getCellAt(row,col+1);
+			}else if(getCellAt(row,col).isDoorway()){
+				RoomCell roomy = (RoomCell) getCellAt(row,col);
 				if(roomy.getDoorDirection() == RoomCell.DoorDirection.LEFT){
-					adjList.add(getCellAt(row,col+1));
+					adjList.add(getCellAt(row,col));
 				}
 			}
 		}
