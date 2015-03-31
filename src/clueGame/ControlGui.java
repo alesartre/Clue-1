@@ -17,6 +17,8 @@ import javax.swing.border.TitledBorder;
 
 
 public class ControlGui extends JFrame {
+	private final int WIDTH = 1000;
+	private final int HEIGHT = 300;
 	private JButton showNotes;
 	private DetectiveNotes notes;
 	private ClueGame game;
@@ -24,7 +26,7 @@ public class ControlGui extends JFrame {
 	public ControlGui(ClueGame game){
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Control");
-		setSize(1000,300);
+		setSize(WIDTH,HEIGHT);
 		setLayout(new GridLayout(2,1));
 		JPanel panel = createUpperPanel();
 		add(panel);

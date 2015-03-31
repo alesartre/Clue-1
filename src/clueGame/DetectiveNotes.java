@@ -14,13 +14,15 @@ import javax.swing.border.TitledBorder;
 import clueGame.Card.CardType;
 
 public class DetectiveNotes extends JDialog {
+	private final int WIDTH = 600;
+	private final int HEIGHT = 660;
 	private ClueGame game;
 	private JButton hideButton;
 	private ArrayList<Card> deck;
 		
 	public DetectiveNotes(ClueGame game){
 		setTitle("Detective Notes");
-		setSize(600,660);
+		setSize(WIDTH,HEIGHT);
 		//setLayout(new GridLayout(3,2));
 		this.game = game;
 		deck = game.getDeck();
