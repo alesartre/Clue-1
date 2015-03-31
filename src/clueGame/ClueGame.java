@@ -12,6 +12,8 @@ import javax.swing.JFrame;
 import clueGame.Card.CardType;
 
 public class ClueGame extends JFrame{
+	private static int TOP_BAR = 32;
+	private static int BORDER = 8;
 	private static Map<Character, String> rooms;
 	private String layoutFileName;
 	private String legendFileName;
@@ -31,7 +33,7 @@ public class ClueGame extends JFrame{
 		setLayout(new GridLayout(2,1));
 		setTitle("Clue Game");
 		loadConfigFiles();
-		setSize(board.getWidth(), board.getHeight());
+		setSize(board.getWidth() + 2*BORDER, board.getHeight() + TOP_BAR + BORDER);
 		System.out.println("board: " + board.getSize());
 	}
 	
@@ -42,7 +44,7 @@ public class ClueGame extends JFrame{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Clue Game");
 		loadConfigFiles();
-		setSize(board.getWidth(), board.getHeight());
+		setSize(board.getWidth() + 2*BORDER, board.getHeight() + TOP_BAR  + BORDER);
 		System.out.println("board: " + board.getSize());
 	}
 	
