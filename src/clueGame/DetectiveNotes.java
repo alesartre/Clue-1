@@ -47,8 +47,6 @@ public class DetectiveNotes extends JDialog {
 		mainPanel.add(roomGuess);
 		add(mainPanel, BorderLayout.CENTER);
 		add(hideButton, BorderLayout.SOUTH);
-		
-		setVisible(true);
 	}
 	
 	public JPanel createCheckBox(Card.CardType t) {

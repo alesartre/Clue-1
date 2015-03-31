@@ -3,6 +3,7 @@
 import java.awt.*;
 
 public class RoomCell extends BoardCell  {
+	private boolean hasName = false;
 	
 	RoomCell(int row, int col, String str) {
 		super(row, col);
@@ -23,6 +24,9 @@ public class RoomCell extends BoardCell  {
 				break;
 			case 'R': doorDirection = DoorDirection.RIGHT;
 				isDoor = true;
+				break;
+			case 'Q':
+				hasName = true;
 				break;
 			}	
 		}
@@ -60,23 +64,34 @@ public class RoomCell extends BoardCell  {
 		return initial;
 	}
 	
+	public boolean isHasName() {
+		return hasName;
+	}
+	
 	@Override
 	public void draw(Graphics g, Board b) {
-		g.setColor(Color.GRAY);
-		g.fillRect(getCol()*CELL_DIMENSION, getRow()*CELL_DIMENSION, CELL_DIMENSION, CELL_DIMENSION);
+		g.setColor(Color.BLACK);
+		if(this.isHasName()) {
+			String name = b.getRooms().get(this.getInitial());
+			g.drawString(name, getCol()*Board.CELL_DIMENSION, getRow()*Board.CELL_DIMENSION);
+		}
+		
+		g.setColor(Color.decode("#C2E0F2"));
+		g.fillRect(getCol()*Board.CELL_DIMENSION, getRow()*Board.CELL_DIMENSION, Board.CELL_DIMENSION, Board.CELL_DIMENSION);
+		
 		if (isDoorway()) {
-			g.setColor(Color.BLUE);
+			g.setColor(Color.decode("#514F59"));
 			if (getDoorDirection()==DoorDirection.DOWN) {
-				g.fillRect(getCol()*CELL_DIMENSION, getRow()*CELL_DIMENSION + (int)(0.8*CELL_DIMENSION), CELL_DIMENSION, (int)(0.2*CELL_DIMENSION));
+				g.fillRect(getCol()*Board.CELL_DIMENSION, getRow()*Board.CELL_DIMENSION + (int)(0.8*Board.CELL_DIMENSION), Board.CELL_DIMENSION, (int)(0.2*Board.CELL_DIMENSION));
 			}
 			else if (getDoorDirection()==DoorDirection.UP) {
-				g.fillRect(getCol()*CELL_DIMENSION, getRow()*CELL_DIMENSION, CELL_DIMENSION, (int)(0.2*CELL_DIMENSION));
+				g.fillRect(getCol()*Board.CELL_DIMENSION, getRow()*Board.CELL_DIMENSION, Board.CELL_DIMENSION, (int)(0.2*Board.CELL_DIMENSION));
 			}
 			else if (getDoorDirection()==DoorDirection.LEFT) {
-				g.fillRect(getCol()*CELL_DIMENSION, getRow()*CELL_DIMENSION, (int)(0.2*CELL_DIMENSION), CELL_DIMENSION);
+				g.fillRect(getCol()*Board.CELL_DIMENSION, getRow()*Board.CELL_DIMENSION, (int)(0.2*Board.CELL_DIMENSION), Board.CELL_DIMENSION);
 			}
 			else if (getDoorDirection()==DoorDirection.RIGHT) {
-				g.fillRect(getCol()*CELL_DIMENSION + (int)(0.8*CELL_DIMENSION), getRow()*CELL_DIMENSION, (int)(0.2*CELL_DIMENSION), CELL_DIMENSION);
+				g.fillRect(getCol()*Board.CELL_DIMENSION + (int)(0.8*Board.CELL_DIMENSION), getRow()*Board.CELL_DIMENSION, (int)(0.2*Board.CELL_DIMENSION), Board.CELL_DIMENSION);
 			}
 		}
 	}

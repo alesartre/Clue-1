@@ -18,6 +18,7 @@ public class Board extends JPanel{
 	}
 
 	private String layoutFileName;
+	public final static int CELL_DIMENSION = 32;
 	public static int MAX_CELLS = 50;
 	private BoardCell[][] layout = new BoardCell[MAX_CELLS][MAX_CELLS];
 	public Map<Character,String> rooms;
@@ -29,9 +30,8 @@ public class Board extends JPanel{
 	private Map<BoardCell, LinkedList<BoardCell>> adjMtx;
 
 	public void loadBoardConfig() throws BadConfigFormatException{
-
 		fillLayout(layoutFileName);
-
+		setSize(CELL_DIMENSION * numCols,CELL_DIMENSION * numRows);
 	}
 
 	public void paintComponent(Graphics g){

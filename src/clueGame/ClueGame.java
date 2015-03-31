@@ -22,7 +22,9 @@ public class ClueGame extends JFrame{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(new GridLayout(2,1));
 		setTitle("Clue Game");
-		setSize(1000, 1000);		
+		loadConfigFiles();
+		setSize(board.getWidth(), board.getHeight());
+		System.out.println("board: " + board.getSize());
 	}
 	
 	public ClueGame(){
@@ -31,8 +33,9 @@ public class ClueGame extends JFrame{
 		legendFileName = "Legend.txt";
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Clue Game");
-		setSize(1000, 1000);
-
+		loadConfigFiles();
+		setSize(board.getWidth(), board.getHeight());
+		System.out.println("board: " + board.getSize());
 	}
 	
 	private static Map<Character, String> rooms;
@@ -118,7 +121,6 @@ public class ClueGame extends JFrame{
 	
 	public void drawBoard(Board b){
 		add(b, BorderLayout.CENTER);
-		setSize(600, 600);
 	}
 	
 	// Deal the deck to players.
@@ -246,7 +248,6 @@ public class ClueGame extends JFrame{
 	/*************************************/
 	public static void main(String[] args){
 		ClueGame game = new ClueGame();
-		game.loadConfigFiles();
 		game.getBoard().calcAdjacencies();
 		game.setVisible(true);
 		ControlGui gui = new ControlGui(game);

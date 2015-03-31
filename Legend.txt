@@ -2,8 +2,8 @@ M,MacLaren's Pub
 B,Barney's Bachelor Pad
 T,Ted's Apartment
 L,Laser Tag Arena
-C,The Captain's Boat
-R,Lily's Classroom
+C,Captain's Boat
+R,Lily's Class
 N,Metro News 1
 A,Cafe L'amour
 F,Farhampton Inn

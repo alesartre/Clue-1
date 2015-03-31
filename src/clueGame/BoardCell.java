@@ -4,7 +4,6 @@ import java.awt.*;
 
 public abstract class BoardCell {
 
-	public final int CELL_DIMENSION = 20;
 	private int row;
 	private int col;
 	

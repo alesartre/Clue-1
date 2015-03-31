@@ -17,10 +17,10 @@ public class Walkway extends BoardCell{
 	
 	@Override
 	public void draw(Graphics g, Board b){
-		g.setColor(Color.YELLOW);
-		g.fillRect(getCol()*CELL_DIMENSION, getRow()*CELL_DIMENSION, CELL_DIMENSION, CELL_DIMENSION);
+		g.setColor(Color.decode("#89888C"));
+		g.fillRect(getCol()*Board.CELL_DIMENSION, getRow()*Board.CELL_DIMENSION, Board.CELL_DIMENSION, Board.CELL_DIMENSION);
 		g.setColor(Color.BLACK);
-		g.drawRect(this.getCol()*CELL_DIMENSION,this.getRow()*CELL_DIMENSION,CELL_DIMENSION,CELL_DIMENSION);
+		g.drawRect(this.getCol()*Board.CELL_DIMENSION,this.getRow()*Board.CELL_DIMENSION,Board.CELL_DIMENSION,Board.CELL_DIMENSION);
 	}
 
 }

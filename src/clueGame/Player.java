@@ -14,8 +14,6 @@ import java.util.Random;
 
 public abstract class Player {
 	
-	public final int CELL_DIMENSION = 20;
-	
 	private String name;
 	private ArrayList<Card> cardList = new ArrayList<Card>();
 	private int startR;
@@ -37,7 +35,7 @@ public abstract class Player {
 	
 	public void draw(Graphics g){
 		g.setColor(color);
-		g.fillOval(startC*CELL_DIMENSION, startR*CELL_DIMENSION, CELL_DIMENSION, CELL_DIMENSION);
+		g.fillOval(startC*Board.CELL_DIMENSION, startR*Board.CELL_DIMENSION, Board.CELL_DIMENSION, Board.CELL_DIMENSION);
 	}
 	
 	// If player has a card that can disprove current suggestion, choose one randomly from options and show.
