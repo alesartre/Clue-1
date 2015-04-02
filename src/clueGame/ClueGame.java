@@ -16,6 +16,7 @@ import clueGame.Card.CardType;
 public class ClueGame extends JFrame{
 	private static int TOP_BAR = 32;
 	private static int BORDER = 8;
+	private static int HAND_GUI_SIZE = 200;
 	private static Map<Character, String> rooms;
 	private String layoutFileName;
 	private String legendFileName;
@@ -32,10 +33,10 @@ public class ClueGame extends JFrame{
 		rooms = new HashMap<Character, String>();
 		board = new Board(rooms, layoutFileName, people);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setLayout(new GridLayout(1,2));
+		//setLayout(new GridLayout(1,2));
 		setTitle("Clue Game");
 		loadConfigFiles();
-		setSize(board.getWidth() + 2*BORDER, board.getHeight() + TOP_BAR + BORDER);
+		setSize(this.getWidth() + board.getWidth() + 2*BORDER, board.getHeight() + TOP_BAR + BORDER);
 		System.out.println("board: " + board.getSize());
 		JOptionPane.showMessageDialog(this, "You are" + people.get(0).getName(), "Welcome to Clue", JOptionPane.INFORMATION_MESSAGE);
 	}
@@ -45,10 +46,10 @@ public class ClueGame extends JFrame{
 		layoutFileName = "Board.csv";
 		legendFileName = "Legend.txt";
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setLayout(new GridLayout(1,2));
+		//setLayout(new GridLayout(1,2));
 		setTitle("Clue Game");
 		loadConfigFiles();
-		setSize(board.getWidth() + 2*BORDER, board.getHeight() + TOP_BAR  + BORDER);
+		setSize(this.getWidth() + board.getWidth() + 2*BORDER, board.getHeight() + TOP_BAR  + BORDER);
 		System.out.println("board: " + board.getSize());
 		JOptionPane.showMessageDialog(this, "You are " + people.get(0).getName() + ", press Next Player to begin play", "Welcome to Clue", JOptionPane.INFORMATION_MESSAGE);
 	}
@@ -211,7 +212,7 @@ public class ClueGame extends JFrame{
 	}
 	
 	public void drawBoard(Board b){
-		add(b);
+		add(b, BorderLayout.CENTER);
 	}
 	
 	public void drawCards(ArrayList<Card> hand) {
@@ -240,12 +241,15 @@ public class ClueGame extends JFrame{
 		panel.add(people);
 		panel.add(rooms);
 		panel.add(weapons);
-		add(panel);
+		add(panel, BorderLayout.EAST);
+		panel.setSize(HAND_GUI_SIZE,0);
+		setSize(panel.getWidth(), panel.getHeight());
 	}
 	
 	public JPanel createBorderPanel(String title) {
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(new EtchedBorder(), title));
+		panel.setLayout(new GridLayout(3,1));
 		return panel;
 	}
 	
