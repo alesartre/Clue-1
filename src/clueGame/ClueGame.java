@@ -7,7 +7,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
-import javax.swing.JFrame;
+import javax.swing.*;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.TitledBorder;
 
 import clueGame.Card.CardType;
 
@@ -21,7 +23,7 @@ public class ClueGame extends JFrame{
 	private ArrayList<Card> deck;
 	private ArrayList<Player> people;
 	private ArrayList<Card> dealt;
-	private Solution solved;	
+	private Solution solved;
 	
 	public ClueGame(String layoutFileName, String legendFileName){
 		super();
@@ -30,11 +32,12 @@ public class ClueGame extends JFrame{
 		rooms = new HashMap<Character, String>();
 		board = new Board(rooms, layoutFileName, people);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setLayout(new GridLayout(2,1));
+		setLayout(new GridLayout(1,2));
 		setTitle("Clue Game");
 		loadConfigFiles();
 		setSize(board.getWidth() + 2*BORDER, board.getHeight() + TOP_BAR + BORDER);
 		System.out.println("board: " + board.getSize());
+		JOptionPane.showMessageDialog(this, "You are" + people.get(0).getName(), "Welcome to Clue", JOptionPane.INFORMATION_MESSAGE);
 	}
 	
 	public ClueGame(){
@@ -42,10 +45,12 @@ public class ClueGame extends JFrame{
 		layoutFileName = "Board.csv";
 		legendFileName = "Legend.txt";
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setLayout(new GridLayout(1,2));
 		setTitle("Clue Game");
 		loadConfigFiles();
 		setSize(board.getWidth() + 2*BORDER, board.getHeight() + TOP_BAR  + BORDER);
 		System.out.println("board: " + board.getSize());
+		JOptionPane.showMessageDialog(this, "You are " + people.get(0).getName() + ", press Next Player to begin play", "Welcome to Clue", JOptionPane.INFORMATION_MESSAGE);
 	}
 	
 	// Call all methods to read and parse config files.
@@ -55,9 +60,10 @@ public class ClueGame extends JFrame{
 			loadPeople("HIMYM_CHARACTERS.txt");
 			board = new Board(rooms, layoutFileName, people);
 			board.loadBoardConfig();
-			drawBoard(board);
 			loadCardConfig("HIMYM_CARDS.txt");
 			deal();
+			drawBoard(board);
+			drawCards(people.get(0).getCardList());
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -205,7 +211,42 @@ public class ClueGame extends JFrame{
 	}
 	
 	public void drawBoard(Board b){
-		add(b, BorderLayout.CENTER);
+		add(b);
+	}
+	
+	public void drawCards(ArrayList<Card> hand) {
+		JPanel panel = new JPanel();
+		panel.setLayout(new GridLayout(4,1));
+		JLabel cardLabel = new JLabel("My Cards");
+		panel.add(cardLabel);
+		JPanel people = createBorderPanel("People");
+		JPanel rooms = createBorderPanel("Rooms");
+		JPanel weapons = createBorderPanel("Weapons");
+		for (Card c : hand) {
+			JTextField cardName = new JTextField(c.getName(), 15);
+			cardName.setEditable(false);
+			switch(c.getCardType()){
+			case WEAPON:
+				weapons.add(cardName);
+				break;
+			case PERSON:
+				people.add(cardName);
+				break;
+			case ROOM:
+				rooms.add(cardName);
+				break;
+			}
+		}
+		panel.add(people);
+		panel.add(rooms);
+		panel.add(weapons);
+		add(panel);
+	}
+	
+	public JPanel createBorderPanel(String title) {
+		JPanel panel = new JPanel();
+		panel.setBorder(new TitledBorder(new EtchedBorder(), title));
+		return panel;
 	}
 	
 	public static String letterToName(char letter){
