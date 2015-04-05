@@ -1,15 +1,14 @@
 package clueGame;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
@@ -20,6 +19,7 @@ public class ControlGui extends JFrame {
 	private final int WIDTH = 1000;
 	private final int HEIGHT = 300;
 	private JButton showNotes;
+	private JButton nextPlayer;
 	private DetectiveNotes notes;
 	private ClueGame game;
 	
@@ -48,13 +48,14 @@ public class ControlGui extends JFrame {
 		turnPanel.add(turnLabel, BorderLayout.CENTER);
 		turnPanel.add(turn, BorderLayout.SOUTH);
 		panel.add(turnPanel);
-		JButton nextPlayer = new JButton("Next Player");
+		nextPlayer = new JButton("Next Player");
 		JButton makeAccusation = new JButton("Make an accusation");
 		showNotes = new JButton("Show Detective Notes");
 		panel.add(nextPlayer);
 		panel.add(makeAccusation);
 		panel.add(showNotes);
 		showNotes.addActionListener(new ButtonListener());
+		nextPlayer.addActionListener(new ButtonListener());
 		return panel;
 		
 	}
@@ -104,7 +105,11 @@ public class ControlGui extends JFrame {
 				System.out.println("HERE");
 				notes.showStuff();
 			}
-		}	
+			else if(e.getSource() == nextPlayer) {
+				if(!game.isTurnFinished())
+					JOptionPane.showMessageDialog(null, "Finish your turn.");
+			}
+		}
 	}
 	
 	

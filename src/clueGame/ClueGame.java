@@ -25,7 +25,8 @@ public class ClueGame extends JFrame{
 	private ArrayList<Player> people;
 	private ArrayList<Card> dealt;
 	private Solution solved;
-	
+	private boolean turnFinished;
+
 	public ClueGame(String layoutFileName, String legendFileName){
 		super();
 		this.layoutFileName = layoutFileName;
@@ -39,6 +40,7 @@ public class ClueGame extends JFrame{
 		setSize(this.getWidth() + board.getWidth() + 2*BORDER, board.getHeight() + TOP_BAR + BORDER);
 		System.out.println("board: " + board.getSize());
 		JOptionPane.showMessageDialog(this, "You are" + people.get(0).getName(), "Welcome to Clue", JOptionPane.INFORMATION_MESSAGE);
+		turnFinished = false;
 	}
 	
 	public ClueGame(){
@@ -52,6 +54,7 @@ public class ClueGame extends JFrame{
 		setSize(this.getWidth() + board.getWidth() + 2*BORDER, board.getHeight() + TOP_BAR  + BORDER);
 		System.out.println("board: " + board.getSize());
 		JOptionPane.showMessageDialog(this, "You are " + people.get(0).getName() + ", press Next Player to begin play", "Welcome to Clue", JOptionPane.INFORMATION_MESSAGE);
+		turnFinished = false;
 	}
 	
 	// Call all methods to read and parse config files.
@@ -271,6 +274,10 @@ public class ClueGame extends JFrame{
 	
 	public ArrayList<Card> getDeck(){
 		return deck;
+	}
+
+	public boolean isTurnFinished() {
+		return turnFinished;
 	}
 
 	//Testing only
