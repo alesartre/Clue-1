@@ -15,17 +15,18 @@ import java.util.Random;
 public abstract class Player {
 	private String name;
 	private ArrayList<Card> cardList = new ArrayList<Card>();
-	private int startR;
-	private int startC;
+	private int row;
+	private int col;
 	private Color color;
-	
+	protected boolean isCurrentPlayer;
+
 	public Player(String name, String color, int row, int col){
 		this.name = name;
 		this.color = convertColor(color);
-		this.startR = row;
-		this.startC = col;
+		this.row = row;
+		this.col = col;
 	}
-	
+
 	public Player(){
 		super();
 	}
@@ -67,17 +68,29 @@ public abstract class Player {
 	
 	public void draw(Graphics g){
 		g.setColor(color);
-		g.fillOval(startC*Board.CELL_DIMENSION, startR*Board.CELL_DIMENSION, Board.CELL_DIMENSION, Board.CELL_DIMENSION);
+		g.fillOval(col*Board.CELL_DIMENSION, row*Board.CELL_DIMENSION, Board.CELL_DIMENSION, Board.CELL_DIMENSION);
 	}
 	
 	public String getName(){
 		return name;
 	}
+	
+	public boolean isCurrentPlayer() {
+		return isCurrentPlayer;
+	}
+	
+	public int getRow() {
+		return row;
+	}
+
+	public int getCol() {
+		return col;
+	}
 
 	@Override
 	public String toString() {
-		return "Player [name=" + name + ", startR=" + startR + ", startC="
-				+ startC + ", color=" + color + "]";
+		return "Player [name=" + name + ", startR=" + row + ", startC="
+				+ col + ", color=" + color + "]";
 	}
 
 	@Override
@@ -86,8 +99,8 @@ public abstract class Player {
 		int result = 1;
 		result = prime * result + ((color == null) ? 0 : color.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + startC;
-		result = prime * result + startR;
+		result = prime * result + col;
+		result = prime * result + row;
 		return result;
 	}
 
@@ -110,9 +123,9 @@ public abstract class Player {
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
-		if (startC != other.startC)
+		if (col != other.col)
 			return false;
-		if (startR != other.startR)
+		if (row != other.row)
 			return false;
 		return true;
 	}

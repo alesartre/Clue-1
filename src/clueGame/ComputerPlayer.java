@@ -18,6 +18,7 @@ public class ComputerPlayer extends Player{
 	
 	public ComputerPlayer(){
 		super();
+		isCurrentPlayer = false;
 	}
 	
 	// Chooses the cell that the computer player will move to.

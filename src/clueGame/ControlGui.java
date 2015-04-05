@@ -22,8 +22,10 @@ public class ControlGui extends JFrame {
 	private JButton nextPlayer;
 	private DetectiveNotes notes;
 	private ClueGame game;
+	private JTextField rolly;
 	
 	public ControlGui(ClueGame game){
+		this.game = game;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Control");
 		setSize(WIDTH,HEIGHT);
@@ -32,8 +34,6 @@ public class ControlGui extends JFrame {
 		add(panel);
 		JPanel panel2 = createLowerPanel();
 		add(panel2);
-		this.game = game;
-		
 		notes = new DetectiveNotes(game);
 		
 	}
@@ -57,7 +57,6 @@ public class ControlGui extends JFrame {
 		showNotes.addActionListener(new ButtonListener());
 		nextPlayer.addActionListener(new ButtonListener());
 		return panel;
-		
 	}
 	
 	private JPanel createLowerPanel(){
@@ -71,7 +70,8 @@ public class ControlGui extends JFrame {
 		dice.setBorder(new TitledBorder (new EtchedBorder(), "Die"));
 		JLabel roll = new JLabel("Roll     ");
 		dice.add(roll);
-		JTextField rolly = new JTextField(25);
+		System.out.println("Die roll: " + game.getDieRoll());
+		rolly = new JTextField(Integer.toString(game.getDieRoll()), 25);
 		rolly.setEditable(false);
 		dice.add(rolly);
 		
@@ -91,7 +91,6 @@ public class ControlGui extends JFrame {
 		res.setEditable(false);
 		result.add(res);
 		
-		
 		panel.add(dice);
 		panel.add(guess);
 		panel.add(result);
@@ -106,9 +105,18 @@ public class ControlGui extends JFrame {
 				notes.showStuff();
 			}
 			else if(e.getSource() == nextPlayer) {
-				if(!game.isTurnFinished())
+				if(!game.isTurnFinished()) {
 					JOptionPane.showMessageDialog(null, "Finish your turn.");
+				}
+				
+				// Clear highlights
+				
+				game.rollDie();
+				Player player = game.getCurrentPlayer();
+				rolly.setText(Integer.toString(game.getDieRoll()));
+				game.getBoard().calcTargets(player.getRow(), player.getCol(), game.getDieRoll());
 			}
+			
 		}
 	}
 	

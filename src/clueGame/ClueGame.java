@@ -13,7 +13,8 @@ import javax.swing.border.TitledBorder;
 
 import clueGame.Card.CardType;
 
-public class ClueGame extends JFrame{
+public class ClueGame extends JFrame {
+	private static int DIE_NUM = 6;
 	private static int TOP_BAR = 32;
 	private static int BORDER = 8;
 	private static int HAND_GUI_SIZE = 200;
@@ -26,6 +27,7 @@ public class ClueGame extends JFrame{
 	private ArrayList<Card> dealt;
 	private Solution solved;
 	private boolean turnFinished;
+	private int dieRoll = 0;
 
 	public ClueGame(String layoutFileName, String legendFileName){
 		super();
@@ -40,7 +42,7 @@ public class ClueGame extends JFrame{
 		setSize(this.getWidth() + board.getWidth() + 2*BORDER, board.getHeight() + TOP_BAR + BORDER);
 		System.out.println("board: " + board.getSize());
 		JOptionPane.showMessageDialog(this, "You are" + people.get(0).getName(), "Welcome to Clue", JOptionPane.INFORMATION_MESSAGE);
-		turnFinished = false;
+		turnFinished = true;
 	}
 	
 	public ClueGame(){
@@ -54,7 +56,7 @@ public class ClueGame extends JFrame{
 		setSize(this.getWidth() + board.getWidth() + 2*BORDER, board.getHeight() + TOP_BAR  + BORDER);
 		System.out.println("board: " + board.getSize());
 		JOptionPane.showMessageDialog(this, "You are " + people.get(0).getName() + ", press Next Player to begin play", "Welcome to Clue", JOptionPane.INFORMATION_MESSAGE);
-		turnFinished = false;
+		turnFinished = true;
 	}
 	
 	// Call all methods to read and parse config files.
@@ -130,6 +132,10 @@ public class ClueGame extends JFrame{
 		
 	}
 	
+	public void rollDie() {
+		dieRoll = new Random().nextInt(DIE_NUM) + 1;
+	}
+
 	// Deal the deck to players.
 	public void deal(){
 		Set<Card> weapons = new HashSet<Card>();
@@ -280,6 +286,19 @@ public class ClueGame extends JFrame{
 		return turnFinished;
 	}
 
+	public int getDieRoll() {
+		return dieRoll;
+	}
+	
+	public Player getCurrentPlayer() {
+		for(Player p : people) {
+			if(p.isCurrentPlayer()) {
+				return p;
+			}
+		}
+		return null;
+	}
+	
 	//Testing only
 	public void setPeople(ArrayList<Player> people) {
 		this.people = people;
