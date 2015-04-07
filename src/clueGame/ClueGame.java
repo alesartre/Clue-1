@@ -320,30 +320,29 @@ public class ClueGame extends JFrame {
 			for(int i = 0; i < board.getNumRows(); i++) {
 				for(int j = 0; j < board.getNumColumns(); j++) {
 					BoardCell cell = board.getCellAt(i, j);
-					if(cell.isTarget()) {
-						//System.out.println(event.getX() + " " + event.getY());
-						//System.out.println(cell.getRow()+ " " + cell.getCol());
-						if(event.getX() >= cell.getCol()*Board.CELL_DIMENSION &&
-								event.getX() <= cell.getCol()*Board.CELL_DIMENSION + Board.CELL_DIMENSION) {
-							if(event.getY() >= cell.getRow()*Board.CELL_DIMENSION &&
-									event.getY() <= cell.getRow()*Board.CELL_DIMENSION + Board.CELL_DIMENSION) {
-								getCurrentPlayer().move(cell.getRow(), cell.getCol());
-								turnFinished = true;
-								break;
+					if(event.getX() >= cell.getCol()*Board.CELL_DIMENSION &&
+							event.getX() <= cell.getCol()*Board.CELL_DIMENSION + Board.CELL_DIMENSION &&
+							event.getY() >= cell.getRow()*Board.CELL_DIMENSION &&
+							event.getY() <= cell.getRow()*Board.CELL_DIMENSION + Board.CELL_DIMENSION) {
+						if(cell.isTarget()) {
+							//System.out.println(event.getX() + " " + event.getY());
+							//System.out.println(cell.getRow()+ " " + cell.getCol());
+							getCurrentPlayer().move(cell.getRow(), cell.getCol());
+							if(cell.isRoom()) {
+								// TODO: Put dialog for suggestion here.
+								// TODO: Make work?
+								// handleSuggestion(blah, blah, blah, ...);
 							}
+							turnFinished = true;
+							repaint();
+							return;
+						} else {
+							JOptionPane.showMessageDialog(null, "404 Target Not Found.");
+							return;
 						}
-						if(cell.isRoom()) {
-							// TODO: Put dialog for suggestion here.
-							// TODO: Make work?
-							// handleSuggestion(blah, blah, blah, ...);
-						}	
-					}
-					else {
-						//JOptionPane.showMessageDialog(this, "That's not cheese!", "WONG WAY", JOptionPane.INFORMATION_MESSAGE);
 					}
 				}
 			}
-			repaint(); // MUST CALL REPAINT
 		}
 		//  Empty definitions for unused event methods.
 		public void mouseClicked (MouseEvent event) {}
