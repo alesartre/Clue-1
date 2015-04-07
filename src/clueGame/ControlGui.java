@@ -110,6 +110,7 @@ public class ControlGui extends JFrame {
 				}
 				
 				// Clear highlights
+				//game.getBoard().clearHighlights();
 				
 				game.rollDie();
 				Player player = game.getCurrentPlayer();

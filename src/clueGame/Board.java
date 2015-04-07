@@ -133,6 +133,7 @@ public class Board extends JPanel{
 					adjList.add(getCellAt(row,col));
 				}
 			}
+			row = row + 1;
 		}
 		if(!(row + 1 >= numRows)){
 			row = row + 1;
@@ -145,6 +146,7 @@ public class Board extends JPanel{
 					adjList.add(getCellAt(row,col));
 				}
 			}
+			row = row - 1;
 		}
 		if (!(col-1 < 0)){
 			col = col - 1;
@@ -157,6 +159,7 @@ public class Board extends JPanel{
 					adjList.add(getCellAt(row,col));
 				}
 			}
+			col = col + 1;
 		}
 		if(!(col+1 >= numCols)){
 			col = col + 1;
@@ -169,6 +172,7 @@ public class Board extends JPanel{
 					adjList.add(getCellAt(row,col));
 				}
 			}
+			col = col - 1;
 		}
 	}
 	
@@ -186,6 +190,7 @@ public class Board extends JPanel{
 		targets = new HashSet<BoardCell>();
 		visited.add(getCellAt(row,col));
 		findTargets(row, col, steps);
+		System.out.println("targets" + targets);
 		if(currentPlayer.isHuman()) {
 			for(BoardCell b : targets) {
 				b.setTarget(true);
@@ -197,8 +202,8 @@ public class Board extends JPanel{
 	// Recursive call for calcTargets
 	public void findTargets(int row, int col, int steps){
 		for(BoardCell cell: getAdjList(row,col)){
-
 			if(steps == 1 || cell.isDoorway()){
+				System.out.println(cell.getRow() + " " + cell.getCol());
 				if(!visited.contains(cell)){
 					targets.add(cell);
 				}
