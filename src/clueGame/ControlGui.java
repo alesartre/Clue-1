@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -23,6 +25,7 @@ public class ControlGui extends JFrame {
 	private DetectiveNotes notes;
 	private ClueGame game;
 	private JTextField rolly;
+	
 	
 	public ControlGui(ClueGame game){
 		this.game = game;
@@ -109,25 +112,27 @@ public class ControlGui extends JFrame {
 					JOptionPane.showMessageDialog(null, "Finish your turn.");
 				}
 				
-				// Clear highlights
-				//game.getBoard().clearHighlights();
+				Player player = game.getCurrentPlayer();
+				
+				game.getBoard().clearHighlights();
 				
 				game.rollDie();
-				Player player = game.getCurrentPlayer();
 				rolly.setText(Integer.toString(game.getDieRoll()));
 				System.out.println(player);
 				game.getBoard().calcTargets(player.getRow(), player.getCol(), game.getDieRoll(), player);
+				//game.getBoard().setCurrentPlayer(player);
 				if(player.isHuman()) {
+					game.setTurnFinished(false);
 					//game.getBoard().highlightTargets();
-					repaint();
 				}
 				
 			}
 			
 		}
 	}
-	
-	
+
+
+
 
 	
 	

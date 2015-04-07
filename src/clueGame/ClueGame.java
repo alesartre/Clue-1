@@ -2,6 +2,8 @@ package clueGame;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -27,6 +29,7 @@ public class ClueGame extends JFrame {
 	private ArrayList<Card> dealt;
 	private Solution solved;
 	private boolean turnFinished;
+
 	private int dieRoll = 0;
 	private int currentPlayer = 0;
 
@@ -43,6 +46,7 @@ public class ClueGame extends JFrame {
 		setSize(this.getWidth() + board.getWidth() + 2*BORDER, board.getHeight() + TOP_BAR + BORDER);
 		System.out.println("board: " + board.getSize());
 		JOptionPane.showMessageDialog(this, "You are" + people.get(0).getName(), "Welcome to Clue", JOptionPane.INFORMATION_MESSAGE);
+		board.addMouseListener(new TargetListener());
 		turnFinished = true;
 	}
 	
@@ -57,6 +61,7 @@ public class ClueGame extends JFrame {
 		setSize(this.getWidth() + board.getWidth() + 2*BORDER, board.getHeight() + TOP_BAR  + BORDER);
 		System.out.println("board: " + board.getSize());
 		JOptionPane.showMessageDialog(this, "You are " + people.get(0).getName() + ", press Next Player to begin play", "Welcome to Clue", JOptionPane.INFORMATION_MESSAGE);
+		board.addMouseListener(new TargetListener());
 		turnFinished = true;
 	}
 	
@@ -263,6 +268,10 @@ public class ClueGame extends JFrame {
 		return panel;
 	}
 	
+	public void moveCurrentPlayer(BoardCell newLocation) {
+		getCurrentPlayer().move(newLocation.getRow(), newLocation.getCol());
+	}
+	
 	public static String letterToName(char letter){
 		return rooms.get(letter);
 	}
@@ -293,6 +302,48 @@ public class ClueGame extends JFrame {
 	
 	public Player getCurrentPlayer() {
 		return people.get(currentPlayer);
+	}
+	
+	public void setTurnFinished(boolean turnFinished) {
+		this.turnFinished = turnFinished;
+	}
+	
+	private class TargetListener implements MouseListener {
+		public void mousePressed (MouseEvent event) {
+			// 
+			for(int i = 0; i < board.getNumRows(); i++) {
+				for(int j = 0; j < board.getNumColumns(); j++) {
+					BoardCell cell = board.getCellAt(i, j);
+					if(cell.isTarget()) {
+						//System.out.println(event.getX() + " " + event.getY());
+						//System.out.println(cell.getRow()+ " " + cell.getCol());
+						if(event.getX() >= cell.getCol()*Board.CELL_DIMENSION &&
+								event.getX() <= cell.getCol()*Board.CELL_DIMENSION + Board.CELL_DIMENSION) {
+							if(event.getY() >= cell.getRow()*Board.CELL_DIMENSION &&
+									event.getY() <= cell.getRow()*Board.CELL_DIMENSION + Board.CELL_DIMENSION) {
+								getCurrentPlayer().move(cell.getRow(), cell.getCol());
+								break;
+							}
+						}
+						if(cell.isRoom()) {
+							// TODO: Put dialog for suggestion here.
+							// TODO: Make work?
+							// handleSuggestion(blah, blah, blah, ...);
+						}
+						turnFinished = true;	
+					}
+					else {
+						//JOptionPane.showMessageDialog(this, "That's not cheese!", "WONG WAY", JOptionPane.INFORMATION_MESSAGE);
+					}
+				}
+			}
+			repaint(); // MUST CALL REPAINT
+		}
+		//  Empty definitions for unused event methods.
+		public void mouseClicked (MouseEvent event) {}
+		public void mouseReleased (MouseEvent event) {}
+		public void mouseEntered (MouseEvent event) {}
+		public void mouseExited (MouseEvent event) {}
 	}
 	
 	//Testing only

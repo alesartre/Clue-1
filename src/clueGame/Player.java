@@ -9,9 +9,6 @@ import java.util.HashSet;
 import java.util.Random;
 
 
-
-
-
 public abstract class Player {
 	private String name;
 	private ArrayList<Card> cardList = new ArrayList<Card>();
@@ -69,6 +66,11 @@ public abstract class Player {
 	public void draw(Graphics g){
 		g.setColor(color);
 		g.fillOval(col*Board.CELL_DIMENSION, row*Board.CELL_DIMENSION, Board.CELL_DIMENSION, Board.CELL_DIMENSION);
+	}
+	
+	public void move(int row, int col) {
+		this.row = row;
+		this.col = col;
 	}
 	
 	public String getName(){

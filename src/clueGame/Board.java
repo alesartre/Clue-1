@@ -1,11 +1,21 @@
 package clueGame;
 
+import java.awt.Graphics;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.*;
-import javax.swing.*;
-import java.awt.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.Set;
+
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 //import experiment.BoardCell;
 
@@ -21,7 +31,7 @@ public class Board extends JPanel{
 	private Set<BoardCell> targets;
 	private ArrayList<Player> players;
 	private Map<BoardCell, LinkedList<BoardCell>> adjMtx;
-	
+
 	Board(Map<Character, String> rooms, String layoutFileName, ArrayList<Player> players){
 		this.rooms = rooms;
 		this.layoutFileName = layoutFileName;
@@ -190,7 +200,6 @@ public class Board extends JPanel{
 		targets = new HashSet<BoardCell>();
 		visited.add(getCellAt(row,col));
 		findTargets(row, col, steps);
-		System.out.println("targets" + targets);
 		if(currentPlayer.isHuman()) {
 			for(BoardCell b : targets) {
 				b.setTarget(true);
@@ -214,6 +223,15 @@ public class Board extends JPanel{
 					findTargets(cell.getRow(), cell.getCol(), steps - 1);
 					visited.remove(cell);
 				}
+			}
+		}
+	}
+	
+	public void clearHighlights() {
+		if(targets != null) {
+			for (BoardCell b : targets) {
+				b.setTarget(false);
+				repaint();
 			}
 		}
 	}
@@ -249,6 +267,5 @@ public class Board extends JPanel{
 		}
 		return null;
 	}
-
 
 }
