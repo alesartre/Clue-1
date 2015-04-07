@@ -114,7 +114,13 @@ public class ControlGui extends JFrame {
 				game.rollDie();
 				Player player = game.getCurrentPlayer();
 				rolly.setText(Integer.toString(game.getDieRoll()));
-				game.getBoard().calcTargets(player.getRow(), player.getCol(), game.getDieRoll());
+				System.out.println(player);
+				game.getBoard().calcTargets(player.getRow(), player.getCol(), game.getDieRoll(), player);
+				if(player.isHuman()) {
+					//game.getBoard().highlightTargets();
+					repaint();
+				}
+				
 			}
 			
 		}

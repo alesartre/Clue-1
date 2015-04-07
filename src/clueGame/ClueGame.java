@@ -28,6 +28,7 @@ public class ClueGame extends JFrame {
 	private Solution solved;
 	private boolean turnFinished;
 	private int dieRoll = 0;
+	private int currentPlayer = 0;
 
 	public ClueGame(String layoutFileName, String legendFileName){
 		super();
@@ -291,12 +292,7 @@ public class ClueGame extends JFrame {
 	}
 	
 	public Player getCurrentPlayer() {
-		for(Player p : people) {
-			if(p.isCurrentPlayer()) {
-				return p;
-			}
-		}
-		return null;
+		return people.get(currentPlayer);
 	}
 	
 	//Testing only

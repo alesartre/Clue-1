@@ -145,7 +145,6 @@ public class AdjacencyTests {
 		Assert.assertTrue(targets.contains(board.getCellAt( 9, 12)));
 		Assert.assertTrue(targets.contains(board.getCellAt(8 ,13 )));
 		Assert.assertTrue(targets.contains(board.getCellAt( 9, 16)));
-		
 	}
 	
 

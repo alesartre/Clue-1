@@ -18,7 +18,7 @@ public abstract class Player {
 	private int row;
 	private int col;
 	private Color color;
-	protected boolean isCurrentPlayer;
+	protected boolean isHuman;
 
 	public Player(String name, String color, int row, int col){
 		this.name = name;
@@ -75,16 +75,16 @@ public abstract class Player {
 		return name;
 	}
 	
-	public boolean isCurrentPlayer() {
-		return isCurrentPlayer;
-	}
-	
 	public int getRow() {
 		return row;
 	}
 
 	public int getCol() {
 		return col;
+	}
+	
+	public boolean isHuman() {
+		return isHuman;
 	}
 
 	@Override

@@ -171,13 +171,27 @@ public class Board extends JPanel{
 			}
 		}
 	}
-
+	
 	// Calculate potential cells player can move to based on number of steps rolled.
 	public void calcTargets(int row, int col, int steps){
 		visited = new HashSet<BoardCell>();
 		targets = new HashSet<BoardCell>();
 		visited.add(getCellAt(row,col));
 		findTargets(row, col, steps);
+	}
+
+	// Calculate potential cells player can move to based on number of steps rolled, with currentPlayer indicated for highlinting
+	public void calcTargets(int row, int col, int steps, Player currentPlayer){
+		visited = new HashSet<BoardCell>();
+		targets = new HashSet<BoardCell>();
+		visited.add(getCellAt(row,col));
+		findTargets(row, col, steps);
+		if(currentPlayer.isHuman()) {
+			for(BoardCell b : targets) {
+				b.setTarget(true);
+			}
+			repaint();
+		}
 	}
 
 	// Recursive call for calcTargets
