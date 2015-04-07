@@ -31,7 +31,7 @@ public class ClueGame extends JFrame {
 	private boolean turnFinished;
 
 	private int dieRoll = 0;
-	private int currentPlayer = 0;
+	private int currentPlayer;
 
 	public ClueGame(String layoutFileName, String legendFileName){
 		super();
@@ -47,6 +47,7 @@ public class ClueGame extends JFrame {
 		System.out.println("board: " + board.getSize());
 		JOptionPane.showMessageDialog(this, "You are" + people.get(0).getName(), "Welcome to Clue", JOptionPane.INFORMATION_MESSAGE);
 		board.addMouseListener(new TargetListener());
+		currentPlayer = people.size() - 1;
 		turnFinished = true;
 	}
 	
@@ -62,6 +63,7 @@ public class ClueGame extends JFrame {
 		System.out.println("board: " + board.getSize());
 		JOptionPane.showMessageDialog(this, "You are " + people.get(0).getName() + ", press Next Player to begin play", "Welcome to Clue", JOptionPane.INFORMATION_MESSAGE);
 		board.addMouseListener(new TargetListener());
+		currentPlayer = people.size() - 1;
 		turnFinished = true;
 	}
 	
@@ -272,6 +274,10 @@ public class ClueGame extends JFrame {
 		getCurrentPlayer().move(newLocation.getRow(), newLocation.getCol());
 	}
 	
+	public void nextPlayer() {
+		currentPlayer = (currentPlayer + 1) % people.size(); 
+	}
+	
 	public static String letterToName(char letter){
 		return rooms.get(letter);
 	}
@@ -303,7 +309,7 @@ public class ClueGame extends JFrame {
 	public Player getCurrentPlayer() {
 		return people.get(currentPlayer);
 	}
-	
+
 	public void setTurnFinished(boolean turnFinished) {
 		this.turnFinished = turnFinished;
 	}
@@ -322,6 +328,7 @@ public class ClueGame extends JFrame {
 							if(event.getY() >= cell.getRow()*Board.CELL_DIMENSION &&
 									event.getY() <= cell.getRow()*Board.CELL_DIMENSION + Board.CELL_DIMENSION) {
 								getCurrentPlayer().move(cell.getRow(), cell.getCol());
+								turnFinished = true;
 								break;
 							}
 						}
@@ -329,8 +336,7 @@ public class ClueGame extends JFrame {
 							// TODO: Put dialog for suggestion here.
 							// TODO: Make work?
 							// handleSuggestion(blah, blah, blah, ...);
-						}
-						turnFinished = true;	
+						}	
 					}
 					else {
 						//JOptionPane.showMessageDialog(this, "That's not cheese!", "WONG WAY", JOptionPane.INFORMATION_MESSAGE);

@@ -25,6 +25,7 @@ public class ControlGui extends JFrame {
 	private DetectiveNotes notes;
 	private ClueGame game;
 	private JTextField rolly;
+	private JTextField turn;
 	
 	
 	public ControlGui(ClueGame game){
@@ -45,7 +46,8 @@ public class ControlGui extends JFrame {
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridLayout(1,3));
 		JLabel turnLabel = new JLabel("Whose turn is it?");
-		JTextField turn = new JTextField(20);
+		turn = new JTextField(20);
+		turn.setEditable(false);
 		JPanel turnPanel = new JPanel();
 		turnPanel.setLayout(new BorderLayout());
 		turnPanel.add(turnLabel, BorderLayout.CENTER);
@@ -111,21 +113,29 @@ public class ControlGui extends JFrame {
 				if(!game.isTurnFinished()) {
 					JOptionPane.showMessageDialog(null, "Finish your turn.");
 				}
-				
-				Player player = game.getCurrentPlayer();
-				
-				game.getBoard().clearHighlights();
-				
-				game.rollDie();
-				rolly.setText(Integer.toString(game.getDieRoll()));
-				System.out.println(player);
-				game.getBoard().calcTargets(player.getRow(), player.getCol(), game.getDieRoll(), player);
-				//game.getBoard().setCurrentPlayer(player);
-				if(player.isHuman()) {
-					game.setTurnFinished(false);
-					//game.getBoard().highlightTargets();
+				else {
+					game.nextPlayer();
+
+					Player player = game.getCurrentPlayer();
+
+					game.getBoard().clearHighlights();
+
+					game.rollDie();
+					rolly.setText(Integer.toString(game.getDieRoll()));
+					turn.setText(player.getName());
+					System.out.println(player);
+					game.getBoard().calcTargets(player.getRow(), player.getCol(), game.getDieRoll(), player);
+					//game.getBoard().setCurrentPlayer(player);
+					if(player.isHuman()) {
+						game.setTurnFinished(false);
+						//game.getBoard().highlightTargets();
+					}
+					else {
+						BoardCell cell = ((ComputerPlayer) player).pickLocation(game.getBoard().getTargets());
+						player.move(cell.getRow(), cell.getCol());
+						game.setTurnFinished(true);
+					}
 				}
-				
 			}
 			
 		}
